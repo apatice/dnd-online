@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="D&D Online — главное меню игры">
+    <title>DnD Online — Главное меню</title>
+    <link rel="stylesheet" href="../common.css">
+    <link rel="stylesheet" href="main.css">
+</head>
+<body>
+
+<!-- Loading -->
+<div id="loadingScreen" class="loading-screen">
+    <div class="loading-logo">D&D</div>
+    <div class="loading-bar-wrap"><div class="loading-bar-fill"></div></div>
+    <div style="font-family:var(--font-cinzel);font-size:13px;color:rgba(212,175,55,0.5);letter-spacing:4px;">ENTERING REALM...</div>
+</div>
+
+<div id="particles" class="particle-bg"></div>
+<div id="runes" class="rune-bg"></div>
+
+<!-- 🖼 PLACEHOLDER: main-bg → assets/main/bg.jpg — Фон главного меню (эпический пейзаж фэнтези) -->
+<div class="main-bg img-placeholder" data-label="bg.jpg"></div>
+
+<!-- Top vignette overlay -->
+<div class="vignette"></div>
+
+<!-- ══ HEADER ══ -->
+<header class="main-header">
+    <div class="header-left">
+        <!-- D&D Logo in Header -->
+        <div class="header-logo"></div>
+        <div class="header-title-wrap">
+            <div class="header-title">Dungeons & Dragons</div>
+            <div class="header-subtitle">Online</div>
+        </div>
+    </div>
+
+    <div class="header-right">
+        <div class="server-status">
+            <div class="status-dot online"></div>
+            <span class="status-text">Servers Online</span>
+        </div>
+        <button class="header-icon-btn" id="newsBtn" title="News">
+            <span>News</span>
+        </button>
+        <button class="header-icon-btn" id="shopBtn" title="Shop">
+            <span>Shop</span>
+        </button>
+    </div>
+</header>
+
+<!-- ══ MAIN CONTENT ══ -->
+<main class="main-content">
+
+    <!-- LEFT: Profile + Character -->
+    <aside class="left-panel">
+        <!-- Profile Card -->
+        <a href="../profile/profile.html" class="profile-card panel" id="profileCard" aria-label="Профиль игрока">
+            <div class="profile-avatar-wrap">
+                <!-- 🖼 PLACEHOLDER: profile-avatar → assets/main/avatar.png — Аватар игрока в главном меню -->
+                <div class="profile-avatar" style="background: url('../assets/avatars/default.png') center/cover no-repeat;"></div>
+                <div class="avatar-ring"></div>
+                <div class="level-badge">Lv.12</div>
+            </div>
+            <div class="profile-info">
+                <div class="player-name" id="mainName">El Pablo</div>
+                <div class="player-rank">Experienced Adventurer</div>
+                <div class="xp-bar-wrap">
+                    <div class="xp-bar-fill" style="width:68%"></div>
+                    <span class="xp-label">68,000 / 100,000 XP</span>
+                </div>
+            </div>
+        </a>
+
+        <!-- Character preview -->
+        <div class="char-preview-card panel">
+            <div class="char-preview-header">
+                <span class="char-preview-title">Active Character</span>
+                <a href="../characters/characters.html" class="char-change-btn">Change</a>
+            </div>
+            <!-- 🖼 PLACEHOLDER: active-char → assets/main/active_char.png — Изображение активного персонажа -->
+            <div class="char-portrait img-placeholder" data-label="active_char.png"></div>
+            <div class="char-name">Aldric Stormhand</div>
+            <div class="char-class">Paladin · Level 8</div>
+            <div class="char-stats-mini">
+                <div class="stat-mini"><span class="stat-icon">❤</span> 85/100</div>
+                <div class="stat-mini"><span class="stat-icon">⚡</span> 42/60</div>
+                <div class="stat-mini"><span class="stat-icon">🛡</span> 18 AC</div>
+            </div>
+        </div>
+
+        <!-- Left nav buttons -->
+        <nav class="left-nav">
+            <a href="../characters/characters.html" class="nav-btn" id="charBtn">
+                <span class="nav-btn-label">Characters</span>
+            </a>
+            <button class="nav-btn" id="statsButton">
+                <span class="nav-btn-label">Statistics</span>
+            </button>
+            <button class="nav-btn" id="friendsButton">
+                <span class="nav-btn-label">Friends</span>
+                <div class="nav-badge">3</div>
+            </button>
+        </nav>
+    </aside>
+
+    <!-- CENTER: Play button + news ticker -->
+    <section class="center-panel">
+        <!-- Main play button -->
+        <button class="play-btn" id="playButton" aria-label="Играть">
+            <!-- 🖼 PLACEHOLDER: play-btn-bg → assets/main/play_btn.png — Большая кнопка PLAY -->
+            <div class="play-btn-bg img-placeholder" data-label="play_btn.png"></div>
+            <div class="play-btn-content">
+                <div class="play-btn-icon">⚔</div>
+                <div class="play-btn-text">PLAY</div>
+                <div class="play-btn-sub">Begin Adventure</div>
+            </div>
+            <div class="play-glow"></div>
+        </button>
+
+        <!-- Quick stats bar -->
+        <div class="quick-stats panel">
+            <div class="qs-item">
+                <div class="qs-value">1,247</div>
+                <div class="qs-label">Players Online</div>
+            </div>
+            <div class="qs-divider"></div>
+            <div class="qs-item">
+                <div class="qs-value">42</div>
+                <div class="qs-label">Active Games</div>
+            </div>
+            <div class="qs-divider"></div>
+            <div class="qs-item">
+                <div class="qs-value">Season 3</div>
+                <div class="qs-label">Current Season</div>
+            </div>
+        </div>
+
+        <!-- News ticker -->
+        <div class="news-ticker panel">
+            <div class="news-text-wrap">
+                <span class="news-tag">NEWS</span>
+                <div class="news-ticker-inner" id="newsTicker">
+                    <span>⟡ New campaign "Curse of Strahd" now available! ⟡ Season 3 Battle Pass launched ⟡ PvP Arena update coming soon ⟡</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- RIGHT: Settings, support, etc. -->
+    <aside class="right-panel">
+        <!-- Right nav -->
+        <nav class="right-nav">
+            <a href="#" class="nav-btn" id="supportBtn">
+                <span class="nav-btn-label">Support</span>
+            </a>
+            <button class="nav-btn" id="settingsButton">
+                <span class="nav-btn-label">Settings</span>
+            </button>
+            <a href="#" class="nav-btn" id="tutorialBtn">
+                <span class="nav-btn-label">Tutorial</span>
+            </a>
+        </nav>
+
+        <!-- Recent activity -->
+        <div class="activity-card panel">
+            <div class="activity-title">Recent Activity</div>
+            <div class="activity-list">
+                <div class="activity-item">
+                    <div class="activity-icon emoji-icon">⚔️</div>
+                    <div class="activity-info">
+                        <div class="activity-text">Defeated the Lich King</div>
+                        <div class="activity-time">2 hours ago</div>
+                    </div>
+                </div>
+                <div class="activity-item">
+                    <div class="activity-icon emoji-icon">✨</div>
+                    <div class="activity-info">
+                        <div class="activity-text">Gained 2,500 XP</div>
+                        <div class="activity-time">2 hours ago</div>
+                    </div>
+                </div>
+                <div class="activity-item">
+                    <div class="activity-icon emoji-icon">🟢</div>
+                    <div class="activity-info">
+                        <div class="activity-text">Misha228 is online</div>
+                        <div class="activity-time">5 hours ago</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Logout -->
+        <button class="logout-btn" id="logoutBtn">
+            <span>Sign Out</span>
+        </button>
+    </aside>
+</main>
+
+<!-- ══ MODALS ══ -->
+
+<!-- Play Modal -->
+<div class="modal-overlay" id="playModal">
+    <div class="modal-box panel corner-border" id="playBox">
+        <button class="modal-close" onclick="closeModal('playModal')">✕</button>
+        <!-- 🖼 PLACEHOLDER: play-modal-bg → assets/main_windows/bg_play.png — Фон окна выбора режима игры -->
+        <div class="modal-bg img-placeholder" data-label="bg_play.png"></div>
+        <h2 class="modal-title">Choose Your Path</h2>
+        <p class="modal-desc">Select how you wish to begin your adventure</p>
+        <div class="gold-divider"></div>
+        <div class="play-options">
+            <a href="../game_adm/game_adm.html" class="play-option" id="createGameBtn">
+                <!-- 🖼 PLACEHOLDER: opt-create → assets/main_windows/create.png — Опция создать игру -->
+                <div class="play-option-img img-placeholder" data-label="create.png"></div>
+                <div class="play-option-icon">🏰</div>
+                <div class="play-option-name">Create Game</div>
+                <div class="play-option-desc">Start a new campaign as Dungeon Master</div>
+            </a>
+            <a href="../game_adm/game_adm.html" class="play-option" id="loadGameBtn">
+                <!-- 🖼 PLACEHOLDER: opt-load → assets/main_windows/load.png — Опция загрузить игру -->
+                <div class="play-option-img img-placeholder" data-label="load.png"></div>
+                <div class="play-option-icon">📜</div>
+                <div class="play-option-name">Load Game</div>
+                <div class="play-option-desc">Continue your existing campaign</div>
+            </a>
+            <a href="../game/game.html" class="play-option" id="joinGameBtn">
+                <!-- 🖼 PLACEHOLDER: opt-join → assets/main_windows/join.png — Опция присоединиться к игре -->
+                <div class="play-option-img img-placeholder" data-label="join.png"></div>
+                <div class="play-option-icon">⚔</div>
+                <div class="play-option-name">Join Game</div>
+                <div class="play-option-desc">Find and join an existing adventure</div>
+            </a>
+        </div>
+        <div class="join-code-row">
+            <input type="text" class="input-base join-code-input" placeholder="Enter invite code..." id="inviteCodeInput">
+            <button class="btn-gold join-code-btn">Join →</button>
+        </div>
+    </div>
+</div>
+
+<!-- Friends Modal -->
+<div class="modal-overlay" id="friendsModal">
+    <div class="modal-box modal-wide panel corner-border">
+        <button class="modal-close" onclick="closeModal('friendsModal')">✕</button>
+        <!-- 🖼 PLACEHOLDER: friends-modal-bg → assets/main_windows/bg_friends.png — Фон окна друзей -->
+        <div class="modal-bg img-placeholder" data-label="bg_friends.png"></div>
+        <h2 class="modal-title">Friends & Groups</h2>
+        <div class="gold-divider"></div>
+        <div class="friends-layout">
+            <!-- Friends column -->
+            <div class="friends-col">
+                <div class="friends-col-header">
+                    <span>👥 Friends</span>
+                    <span class="friends-count">6 online</span>
+                </div>
+                <input type="text" class="input-base search-input" id="friendsSearch" placeholder="Search players...">
+                <div class="friends-list scrollable" id="friendsList">
+                    <div class="friend-item online" data-online="true">
+                        <!-- 🖼 PLACEHOLDER: friend-ava-1 → assets/avatars/1.jpg — Аватар друга Misha228 -->
+                        <div class="friend-avatar" style="background: url('../assets/avatars/1.png') center/cover no-repeat;"></div>
+                        <div class="friend-info">
+                            <div class="friend-name">Misha228</div>
+                            <div class="friend-status online-text">● In game</div>
+                        </div>
+                        <button class="friend-action-btn" title="Invite">⚔</button>
+                    </div>
+                    <div class="friend-item" data-online="false">
+                        <!-- 🖼 PLACEHOLDER: friend-ava-2 → assets/avatars/2.jpg — Аватар друга Dmitriy777 -->
+                        <div class="friend-avatar" style="background: url('../assets/avatars/2.png') center/cover no-repeat;"></div>
+                        <div class="friend-info">
+                            <div class="friend-name">Dmitriy777</div>
+                            <div class="friend-status">● Online</div>
+                        </div>
+                        <button class="friend-action-btn">⚔</button>
+                    </div>
+                    <div class="friend-item" data-online="false">
+                        <!-- 🖼 PLACEHOLDER: friend-ava-3 → assets/avatars/7.jpg — Аватар John Cena -->
+                        <div class="friend-avatar" style="background: url('../assets/avatars/7.png') center/cover no-repeat;"></div>
+                        <div class="friend-info">
+                            <div class="friend-name">John Cena</div>
+                            <div class="friend-status offline-text">● Offline</div>
+                        </div>
+                        <button class="friend-action-btn" disabled>⚔</button>
+                    </div>
+                    <div class="friend-item" data-online="false">
+                        <!-- 🖼 PLACEHOLDER: friend-ava-4 → assets/avatars/4.jpg — Аватар Danil Kolbasenko -->
+                        <div class="friend-avatar" style="background: url('../assets/avatars/4.png') center/cover no-repeat;"></div>
+                        <div class="friend-info">
+                            <div class="friend-name">Danil Kolbasenko</div>
+                            <div class="friend-status">● Online</div>
+                        </div>
+                        <button class="friend-action-btn">⚔</button>
+                    </div>
+                    <div class="friend-item" data-online="false">
+                        <!-- 🖼 PLACEHOLDER: friend-ava-5 → assets/avatars/5.jpg — Аватар Matveyka -->
+                        <div class="friend-avatar" style="background: url('../assets/avatars/5.png') center/cover no-repeat;"></div>
+                        <div class="friend-info">
+                            <div class="friend-name">Matveyka</div>
+                            <div class="friend-status offline-text">● Offline</div>
+                        </div>
+                        <button class="friend-action-btn" disabled>⚔</button>
+                    </div>
+                    <div class="friend-item" data-online="false">
+                        <!-- 🖼 PLACEHOLDER: friend-ava-6 → assets/avatars/6.jpg — Аватар CharlieKirk -->
+                        <div class="friend-avatar" style="background: url('../assets/avatars/6.png') center/cover no-repeat;"></div>
+                        <div class="friend-info">
+                            <div class="friend-name">CharlieKirk</div>
+                            <div class="friend-status">● Online</div>
+                        </div>
+                        <button class="friend-action-btn">⚔</button>
+                    </div>
+                </div>
+                <button class="btn-gold add-friend-btn">+ Add Friend</button>
+            </div>
+
+            <!-- Groups column -->
+            <div class="friends-col">
+                <div class="friends-col-header">
+                    <span>🏰 Groups</span>
+                    <span class="friends-count">3 active</span>
+                </div>
+                <input type="text" class="input-base search-input" id="groupsSearch" placeholder="Search groups...">
+                <div class="friends-list scrollable" id="groupsList">
+                    <div class="group-item">
+                        <!-- 🖼 PLACEHOLDER: group-ava-a → assets/avatars/a.jpg — Аватар группы Uchiha -->
+                        <div class="friend-avatar" style="background: url('../assets/avatars/a.png') center/cover no-repeat;"></div>
+                        <div class="friend-info">
+                            <div class="friend-name">Uchiha</div>
+                            <div class="friend-status">4 members · Active</div>
+                        </div>
+                        <button class="friend-action-btn">→</button>
+                    </div>
+                    <div class="group-item">
+                        <!-- 🖼 PLACEHOLDER: group-ava-b → assets/avatars/b.jpg — Аватар группы Navi -->
+                        <div class="friend-avatar" style="background: url('../assets/avatars/b.png') center/cover no-repeat;"></div>
+                        <div class="friend-info">
+                            <div class="friend-name">Navi</div>
+                            <div class="friend-status">6 members · In Campaign</div>
+                        </div>
+                        <button class="friend-action-btn">→</button>
+                    </div>
+                    <div class="group-item">
+                        <!-- 🖼 PLACEHOLDER: group-ava-c → assets/avatars/c.jpg — Аватар группы Kazah Sila -->
+                        <div class="friend-avatar" style="background: url('../assets/avatars/c.png') center/cover no-repeat;"></div>
+                        <div class="friend-info">
+                            <div class="friend-name">Kazah Sila</div>
+                            <div class="friend-status">3 members · Online</div>
+                        </div>
+                        <button class="friend-action-btn">→</button>
+                    </div>
+                    <div class="group-item">
+                        <!-- 🖼 PLACEHOLDER: group-ava-d → assets/avatars/d.jpg — Аватар группы Zovchiki -->
+                        <div class="friend-avatar" style="background: url('../assets/avatars/d.png') center/cover no-repeat;"></div>
+                        <div class="friend-info">
+                            <div class="friend-name">Zovchiki</div>
+                            <div class="friend-status">5 members · Idle</div>
+                        </div>
+                        <button class="friend-action-btn">→</button>
+                    </div>
+                    <div class="group-item">
+                        <!-- 🖼 PLACEHOLDER: group-ava-e → assets/avatars/e.jpg — Аватар группы Danger Minony -->
+                        <div class="friend-avatar" style="background: url('../assets/avatars/e.png') center/cover no-repeat;"></div>
+                        <div class="friend-info">
+                            <div class="friend-name">Danger Minony</div>
+                            <div class="friend-status">2 members · Online</div>
+                        </div>
+                        <button class="friend-action-btn">→</button>
+                    </div>
+                </div>
+                <button class="btn-gold add-friend-btn">+ Create Group</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Settings Modal -->
+<div class="modal-overlay" id="settingsModal">
+    <div class="modal-box panel corner-border">
+        <button class="modal-close" onclick="closeModal('settingsModal')">✕</button>
+        <!-- 🖼 PLACEHOLDER: settings-modal-bg → assets/main_windows/window_set.png — Фон окна настроек -->
+        <div class="modal-bg img-placeholder" data-label="window_set.png"></div>
+        <h2 class="modal-title">⚙ Settings</h2>
+        <div class="gold-divider"></div>
+        <div class="settings-tabs">
+            <button class="stab active" data-tab="audio">🔊 Audio</button>
+            <button class="stab" data-tab="graphics">🖥 Graphics</button>
+            <button class="stab" data-tab="controls">🎮 Controls</button>
+            <button class="stab" data-tab="language">🌍 Language</button>
+        </div>
+        <div class="settings-body">
+            <!-- Audio -->
+            <div class="stab-content active" id="tab-audio">
+                <div class="setting-row">
+                    <span class="setting-label">Master Volume</span>
+                    <div class="slider-wrap">
+                        <input type="range" class="volume-slider" id="masterVolume" min="0" max="100" value="80">
+                        <span class="volume-value" id="masterVolumeValue">80%</span>
+                    </div>
+                </div>
+                <div class="setting-row">
+                    <span class="setting-label">Music Volume</span>
+                    <div class="slider-wrap">
+                        <input type="range" class="volume-slider" id="musicVolume" min="0" max="100" value="50">
+                        <span class="volume-value" id="musicVolumeValue">50%</span>
+                    </div>
+                </div>
+                <div class="setting-row">
+                    <span class="setting-label">SFX Volume</span>
+                    <div class="slider-wrap">
+                        <input type="range" class="volume-slider" id="gameVolume" min="0" max="100" value="70">
+                        <span class="volume-value" id="gameVolumeValue">70%</span>
+                    </div>
+                </div>
+                <div class="setting-row">
+                    <span class="setting-label">Voice Chat</span>
+                    <label class="toggle-switch">
+                        <input type="checkbox" checked id="voiceToggle">
+                        <span class="toggle-knob"></span>
+                    </label>
+                </div>
+            </div>
+            <!-- Graphics -->
+            <div class="stab-content" id="tab-graphics">
+                <div class="setting-row">
+                    <span class="setting-label">Quality</span>
+                    <div class="radio-row">
+                        <label class="radio-opt"><input type="radio" name="gfx" value="low"> Low</label>
+                        <label class="radio-opt"><input type="radio" name="gfx" value="med" checked> Medium</label>
+                        <label class="radio-opt"><input type="radio" name="gfx" value="high"> High</label>
+                        <label class="radio-opt"><input type="radio" name="gfx" value="ultra"> Ultra</label>
+                    </div>
+                </div>
+                <div class="setting-row">
+                    <span class="setting-label">Fullscreen</span>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="fullscreenToggle">
+                        <span class="toggle-knob"></span>
+                    </label>
+                </div>
+                <div class="setting-row">
+                    <span class="setting-label">Particles</span>
+                    <label class="toggle-switch">
+                        <input type="checkbox" checked id="particlesToggle">
+                        <span class="toggle-knob"></span>
+                    </label>
+                </div>
+                <div class="setting-row">
+                    <span class="setting-label">FPS Limit</span>
+                    <select class="input-base" style="width:140px;padding:8px 12px;font-size:13px;">
+                        <option>30</option>
+                        <option selected>60</option>
+                        <option>120</option>
+                        <option>Unlimited</option>
+                    </select>
+                </div>
+            </div>
+            <!-- Controls -->
+            <div class="stab-content" id="tab-controls">
+                <div class="keybinds-list">
+                    <div class="keybind-row"><span>Move Forward</span><kbd>W</kbd></div>
+                    <div class="keybind-row"><span>Move Back</span><kbd>S</kbd></div>
+                    <div class="keybind-row"><span>Attack</span><kbd>LMB</kbd></div>
+                    <div class="keybind-row"><span>Open Chat</span><kbd>T</kbd></div>
+                    <div class="keybind-row"><span>Open Map</span><kbd>M</kbd></div>
+                    <div class="keybind-row"><span>Roll Dice</span><kbd>R</kbd></div>
+                    <div class="keybind-row"><span>Inventory</span><kbd>I</kbd></div>
+                    <div class="keybind-row"><span>Character Sheet</span><kbd>C</kbd></div>
+                </div>
+            </div>
+            <!-- Language -->
+            <div class="stab-content" id="tab-language">
+                <div class="setting-row">
+                    <span class="setting-label">Language</span>
+                    <select class="input-base" style="width:200px;padding:10px 16px;">
+                        <option value="en">🇬🇧 English</option>
+                        <option value="ru" selected>🇷🇺 Русский</option>
+                        <option value="de">🇩🇪 Deutsch</option>
+                        <option value="fr">🇫🇷 Français</option>
+                        <option value="es">🇪🇸 Español</option>
+                    </select>
+                </div>
+                <div class="setting-row">
+                    <span class="setting-label">Date Format</span>
+                    <select class="input-base" style="width:200px;padding:10px 16px;">
+                        <option>DD/MM/YYYY</option>
+                        <option>MM/DD/YYYY</option>
+                        <option>YYYY-MM-DD</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="settings-footer">
+            <!-- 🖼 PLACEHOLDER: btn-apply → assets/main_windows/apply_set.png — Кнопка применить настройки -->
+            <button class="btn-gold settings-save" id="settingsApply">
+                <div class="img-placeholder btn-img" data-label="apply_set.png"></div>
+                <span>✓ Apply</span>
+            </button>
+            <!-- 🖼 PLACEHOLDER: btn-reset → assets/main_windows/reset_set.png — Кнопка сброса настроек -->
+            <button class="btn-gold settings-reset" onclick="closeModal('settingsModal')">
+                <div class="img-placeholder btn-img" data-label="reset_set.png"></div>
+                <span>↺ Reset</span>
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- Stats Modal -->
+<div class="modal-overlay" id="statsModal">
+    <div class="modal-box modal-wide panel corner-border">
+        <button class="modal-close" onclick="closeModal('statsModal')">✕</button>
+        <!-- 🖼 PLACEHOLDER: stats-modal-bg → assets/main_windows/stats_window.png — Фон окна статистики -->
+        <div class="modal-bg img-placeholder" data-label="stats_window.png"></div>
+        <h2 class="modal-title">📊 Statistics</h2>
+        <div class="gold-divider"></div>
+        <div class="stats-grid">
+            <div class="stat-card panel">
+                <div class="stat-card-icon">⚔</div>
+                <div class="stat-card-value">450</div>
+                <div class="stat-card-label">Monsters Defeated</div>
+            </div>
+            <div class="stat-card panel">
+                <div class="stat-card-icon">💀</div>
+                <div class="stat-card-value">78</div>
+                <div class="stat-card-label">Critical Hits</div>
+            </div>
+            <div class="stat-card panel">
+                <div class="stat-card-icon">📜</div>
+                <div class="stat-card-value">12</div>
+                <div class="stat-card-label">Campaigns</div>
+            </div>
+            <div class="stat-card panel">
+                <div class="stat-card-icon">⭐</div>
+                <div class="stat-card-value">150K</div>
+                <div class="stat-card-label">Total XP</div>
+            </div>
+            <div class="stat-card panel">
+                <div class="stat-card-icon">🪤</div>
+                <div class="stat-card-value">92</div>
+                <div class="stat-card-label">Traps Disarmed</div>
+            </div>
+            <div class="stat-card panel">
+                <div class="stat-card-icon">🥷</div>
+                <div class="stat-card-value">204</div>
+                <div class="stat-card-label">Stealth Passes</div>
+            </div>
+            <div class="stat-card panel">
+                <div class="stat-card-icon">💰</div>
+                <div class="stat-card-value">25.7K</div>
+                <div class="stat-card-label">Gold Looted</div>
+            </div>
+            <div class="stat-card panel">
+                <div class="stat-card-icon">✨</div>
+                <div class="stat-card-value">34</div>
+                <div class="stat-card-label">Magic Items</div>
+            </div>
+            <div class="stat-card panel">
+                <div class="stat-card-icon">❤</div>
+                <div class="stat-card-value">15</div>
+                <div class="stat-card-label">Death Saves Passed</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- WIP Overlay -->
+<div class="wip-overlay">
+    <div class="wip-box">
+        <!-- 🖼 PLACEHOLDER: wip-img → assets/wip/wip.png — Изображение "In Development" -->
+        <div class="wip-image" style="background: url('../assets/wip/wip.png') center/cover no-repeat;"></div>
+        <div class="wip-title">Work in Progress</div>
+        <div class="wip-subtitle">This feature is coming soon, adventurer...</div>
+        <button class="btn-gold wip-close">Understood</button>
+    </div>
+</div>
+
+<script src="../common.js"></script>
+<script src="main.js"></script>
+</body>
+</html>

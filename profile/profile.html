@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="D&D Online — профиль игрока">
+    <title>DnD Online — Профиль</title>
+    <link rel="stylesheet" href="../common.css">
+    <link rel="stylesheet" href="profile.css">
+</head>
+<body>
+
+<div id="loadingScreen" class="loading-screen">
+    <div class="loading-logo">D&D</div>
+    <div class="loading-bar-wrap"><div class="loading-bar-fill"></div></div>
+</div>
+
+<div id="particles" class="particle-bg"></div>
+<div id="runes" class="rune-bg"></div>
+
+<!-- 🖼 PLACEHOLDER: profile-bg → assets/profile/bg.jpg — Фон страницы профиля (замок/библиотека) -->
+<div class="profile-bg img-placeholder" data-label="bg.jpg"></div>
+<div class="profile-bg-overlay"></div>
+
+<div class="profile-layout">
+
+    <!-- ══ LEFT SIDEBAR ══ -->
+    <aside class="profile-sidebar">
+
+        <!-- Back button -->
+        <a href="../main/main.html" class="back-btn" aria-label="Назад в меню">
+            <span>← Back</span>
+        </a>
+
+        <!-- Avatar card -->
+        <div class="avatar-section panel">
+            <div class="avatar-container">
+                <!-- 🖼 PLACEHOLDER: profile-avatar → assets/profile/avatar.png — Аватар игрока на странице профиля -->
+                <div class="profile-avatar" style="background: url('../assets/avatars/default.png') center/cover no-repeat;" id="profileAvatar"></div>
+                <div class="avatar-glow"></div>
+                <button class="avatar-change-btn" id="changeAvatarBtn" title="Change avatar">
+                    <!-- 🖼 PLACEHOLDER: avatar-edit-icon → assets/profile/edit_icon.png — Иконка редактирования аватара -->
+                    <div class="edit-icon-img img-placeholder" data-label="edit_icon.png"></div>
+                    <span>✎</span>
+                </button>
+                <input type="file" id="avatarUploadInput" accept="image/*" style="display: none;">
+            </div>
+            <div class="level-badge-large">
+                <!-- 🖼 PLACEHOLDER: level-badge → assets/profile/badge_lv.png — Бейдж уровня -->
+                <div class="level-badge-bg img-placeholder" data-label="badge_lv.png"></div>
+                <span class="level-text">LVL 12</span>
+            </div>
+            <div class="player-name-large" id="profileName">El Pablo</div>
+            <div class="player-title" id="profileTitle">Experienced Adventurer</div>
+
+            <div class="xp-section">
+                <div class="xp-bar-wrap">
+                    <div class="xp-bar-fill" id="xpFill" style="width:68%"></div>
+                </div>
+                <div class="xp-numbers">68,000 / 100,000 XP</div>
+            </div>
+
+            <div class="join-date">
+                <span>Joined: January 2024</span>
+            </div>
+        </div>
+
+        <!-- Action buttons -->
+        <div class="sidebar-actions">
+            <!-- 🖼 PLACEHOLDER: btn-edit → assets/profile/edit.png — Кнопка редактирования профиля -->
+            <button class="profile-action-btn" id="editProfileBtn">
+                <span>✎ Edit Profile</span>
+            </button>
+            <!-- 🖼 PLACEHOLDER: btn-archive → assets/profile/archive.png — Кнопка архива -->
+            <button class="profile-action-btn" id="archiveBtn">
+                <span>📜 Archive</span>
+            </button>
+            <!-- 🖼 PLACEHOLDER: btn-share → assets/profile/share.png — Кнопка поделиться -->
+            <button class="profile-action-btn" id="shareBtn">
+                <span>🔗 Share Profile</span>
+            </button>
+        </div>
+    </aside>
+
+    <!-- ══ MAIN AREA ══ -->
+    <main class="profile-main">
+
+        <!-- Tabs -->
+        <nav class="profile-tabs" role="tablist">
+            <button class="profile-tab active" data-tab="overview">Overview</button>
+            <button class="profile-tab" data-tab="description">Description</button>
+            <button class="profile-tab" data-tab="stats">Statistics</button>
+            <button class="profile-tab" data-tab="achievements">Achievements</button>
+            <button class="profile-tab" data-tab="history">History</button>
+        </nav>
+
+        <!-- ── Overview Tab ── -->
+        <div class="profile-tab-content active" id="tab-overview">
+            <div class="overview-grid">
+                <!-- Active character -->
+                <div class="overview-card panel active-char-card">
+                    <div class="card-header">
+                        <h2 class="card-title">⚔ Active Character</h2>
+                        <a href="../characters/characters.html" class="card-link">Change →</a>
+                    </div>
+                    <div class="char-card-body">
+                        <!-- 🖼 PLACEHOLDER: char-portrait → assets/profile/char_portrait.png — Портрет активного персонажа -->
+                        <div class="char-portrait-lg img-placeholder" data-label="char_portrait.png"></div>
+                        <div class="char-details">
+                            <div class="char-name-lg">Aldric Stormhand</div>
+                            <div class="char-class-lg">Paladin · Level 8</div>
+                            <div class="char-race">Race: Human</div>
+                            <div class="char-align">Alignment: Lawful Good</div>
+                            <div class="char-attr-row">
+                                <div class="char-attr"><span class="attr-icon">❤</span><span>85/100 HP</span></div>
+                                <div class="char-attr"><span class="attr-icon">⚡</span><span>42/60 MP</span></div>
+                                <div class="char-attr"><span class="attr-icon">🛡</span><span>18 AC</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Mini stats -->
+                <div class="overview-card panel mini-stats-card">
+                    <div class="card-header">
+                        <h2 class="card-title">📊 Quick Stats</h2>
+                    </div>
+                    <div class="mini-stats-grid">
+                        <div class="mini-stat"><div class="ms-val">12</div><div class="ms-lab">Campaigns</div></div>
+                        <div class="mini-stat"><div class="ms-val">85</div><div class="ms-lab">Sessions</div></div>
+                        <div class="mini-stat"><div class="ms-val">450</div><div class="ms-lab">Monsters</div></div>
+                        <div class="mini-stat"><div class="ms-val">25.7K</div><div class="ms-lab">Gold</div></div>
+                    </div>
+                </div>
+
+                <!-- Recent games -->
+                <div class="overview-card panel recent-games-card">
+                    <div class="card-header">
+                        <h2 class="card-title">🎲 Recent Games</h2>
+                    </div>
+                    <div class="recent-games-list">
+                        <div class="recent-game-item">
+                            <div class="game-thumb">⚔️</div>
+                            <div class="game-info">
+                                <div class="game-name">Curse of Strahd</div>
+                                <div class="game-date">June 10, 2026</div>
+                                <div class="game-result win">Victory</div>
+                            </div>
+                        </div>
+                        <div class="recent-game-item">
+                            <div class="game-thumb">⚔️</div>
+                            <div class="game-info">
+                                <div class="game-name">Lost Mines of Phandelver</div>
+                                <div class="game-date">June 5, 2026</div>
+                                <div class="game-result">Completed</div>
+                            </div>
+                        </div>
+                        <div class="recent-game-item">
+                            <div class="game-thumb">⚔️</div>
+                            <div class="game-info">
+                                <div class="game-name">Waterdeep: Dragon Heist</div>
+                                <div class="game-date">May 28, 2026</div>
+                                <div class="game-result loss">Defeated</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ── Description Tab ── -->
+        <div class="profile-tab-content" id="tab-description">
+            <div class="desc-layout panel">
+                <div class="desc-section">
+                    <h2 class="desc-heading">Personal Info</h2>
+                    <div class="gold-divider"></div>
+                    <div class="desc-fields">
+                        <div class="desc-field">
+                            <label class="desc-label">Username</label>
+                            <div class="desc-value editable" id="editName" contenteditable="false">El Pablo</div>
+                        </div>
+                        <div class="desc-field">
+                            <label class="desc-label">Age</label>
+                            <input type="number" class="desc-select" id="editAge" min="1" max="99" value="27" disabled>
+                        </div>
+                        <div class="desc-field">
+                            <label class="desc-label">Gender</label>
+                            <select class="desc-select" id="editGender" disabled>
+                                <option value="secret" selected>Secret</option>
+                                <option value="male">Male</option>
+                                <option value="female">Female</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div class="desc-field">
+                            <label class="desc-label">Location</label>
+                            <div class="desc-value editable" id="editLocation" contenteditable="false">Moscow, Russia</div>
+                        </div>
+                        <div class="desc-field">
+                            <label class="desc-label">Timezone</label>
+                            <select class="desc-select" id="editTimezone" disabled>
+                                <option value="UTC-12">UTC-12</option>
+                                <option value="UTC-11">UTC-11</option>
+                                <option value="UTC-10">UTC-10</option>
+                                <option value="UTC-9">UTC-9</option>
+                                <option value="UTC-8">UTC-8</option>
+                                <option value="UTC-7">UTC-7</option>
+                                <option value="UTC-6">UTC-6</option>
+                                <option value="UTC-5">UTC-5</option>
+                                <option value="UTC-4">UTC-4</option>
+                                <option value="UTC-3">UTC-3</option>
+                                <option value="UTC-2">UTC-2</option>
+                                <option value="UTC-1">UTC-1</option>
+                                <option value="UTC+0">UTC+0</option>
+                                <option value="UTC+1">UTC+1</option>
+                                <option value="UTC+2">UTC+2</option>
+                                <option value="UTC+3" selected>UTC+3</option>
+                                <option value="UTC+4">UTC+4</option>
+                                <option value="UTC+5">UTC+5</option>
+                                <option value="UTC+6">UTC+6</option>
+                                <option value="UTC+7">UTC+7</option>
+                                <option value="UTC+8">UTC+8</option>
+                                <option value="UTC+9">UTC+9</option>
+                                <option value="UTC+10">UTC+10</option>
+                                <option value="UTC+11">UTC+11</option>
+                                <option value="UTC+12">UTC+12</option>
+                                <option value="UTC+13">UTC+13</option>
+                                <option value="UTC+14">UTC+14</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="desc-section">
+                    <h2 class="desc-heading">About Yourself</h2>
+                    <div class="gold-divider"></div>
+                    <div class="about-container">
+                        <div class="about-box scrollable" id="aboutBox" contenteditable="false">A seasoned adventurer who prefers the shadows. Master of strategy and cunning. Loves long campaigns and complex lore. Always looking for worthy companions to explore the depths of the Underdark.</div>
+                        <div class="about-counter" id="aboutCounter">0/500</div>
+                    </div>
+                </div>
+                <div class="desc-section">
+                    <h2 class="desc-heading">Preferences</h2>
+                    <div class="gold-divider"></div>
+                    <div class="pref-list">
+                        <div class="pref-tag active">🎭 Roleplay</div>
+                        <div class="pref-tag active">⚔ Combat</div>
+                        <div class="pref-tag">🗺 Exploration</div>
+                        <div class="pref-tag active">📖 Storytelling</div>
+                        <div class="pref-tag">🧩 Puzzles</div>
+                        <div class="pref-tag active">🌑 Dark Themes</div>
+                        <div class="pref-tag">😂 Humor</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ── Stats Tab ── -->
+        <div class="profile-tab-content" id="tab-stats">
+            <div class="stats-layout">
+                <div class="stats-col panel">
+                    <h2 class="card-title">⚔ Combat</h2>
+                    <div class="gold-divider"></div>
+                    <div class="stat-rows">
+                        <div class="stat-row"><span>Monsters Defeated</span><span class="stat-val">450</span></div>
+                        <div class="stat-row"><span>Critical Hits</span><span class="stat-val">78</span></div>
+                        <div class="stat-row"><span>Death Saves Passed</span><span class="stat-val">15</span></div>
+                        <div class="stat-row"><span>Damage Dealt</span><span class="stat-val">284K</span></div>
+                        <div class="stat-row"><span>Spells Cast</span><span class="stat-val">1,204</span></div>
+                        <div class="stat-row"><span>Healing Done</span><span class="stat-val">42K</span></div>
+                    </div>
+                </div>
+                <div class="stats-col panel">
+                    <h2 class="card-title">🗺 Exploration</h2>
+                    <div class="gold-divider"></div>
+                    <div class="stat-rows">
+                        <div class="stat-row"><span>Campaigns Played</span><span class="stat-val">12</span></div>
+                        <div class="stat-row"><span>Sessions Completed</span><span class="stat-val">85</span></div>
+                        <div class="stat-row"><span>Traps Disarmed</span><span class="stat-val">92</span></div>
+                        <div class="stat-row"><span>Stealth Checks</span><span class="stat-val">204</span></div>
+                        <div class="stat-row"><span>Rooms Explored</span><span class="stat-val">1,847</span></div>
+                        <div class="stat-row"><span>Secrets Found</span><span class="stat-val">63</span></div>
+                    </div>
+                </div>
+                <div class="stats-col panel">
+                    <h2 class="card-title">💰 Wealth</h2>
+                    <div class="gold-divider"></div>
+                    <div class="stat-rows">
+                        <div class="stat-row"><span>Gold Looted</span><span class="stat-val">25,780</span></div>
+                        <div class="stat-row"><span>Magic Items</span><span class="stat-val">34</span></div>
+                        <div class="stat-row"><span>Total XP</span><span class="stat-val">150K</span></div>
+                        <div class="stat-row"><span>Quests Completed</span><span class="stat-val">47</span></div>
+                        <div class="stat-row"><span>Items Crafted</span><span class="stat-val">18</span></div>
+                        <div class="stat-row"><span>Merchants Met</span><span class="stat-val">95</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ── Achievements Tab ── -->
+        <div class="profile-tab-content" id="tab-achievements">
+            <div class="achievements-grid">
+                <!-- 🖼 PLACEHOLDER: ach-1 → assets/profile/ach_dragonslayer.png — Достижение Dragonslayer -->
+                <div class="achievement-card panel earned">
+                    <div class="ach-icon">🐉</div>
+                    <div class="ach-name">Dragon Slayer</div>
+                    <div class="ach-desc">Defeat 3 dragons in a single campaign</div>
+                    <div class="ach-date">May 2026</div>
+                </div>
+                <!-- 🖼 PLACEHOLDER: ach-2 → assets/profile/ach_shadowstep.png — Достижение Shadow Step -->
+                <div class="achievement-card panel earned">
+                    <div class="ach-icon">👣</div>
+                    <div class="ach-name">Shadow Step</div>
+                    <div class="ach-desc">Pass 200 stealth checks</div>
+                    <div class="ach-date">April 2026</div>
+                </div>
+                <!-- 🖼 PLACEHOLDER: ach-3 → assets/profile/ach_survivor.png — Достижение Death Survivor -->
+                <div class="achievement-card panel earned">
+                    <div class="ach-icon">💀</div>
+                    <div class="ach-name">Death Survivor</div>
+                    <div class="ach-desc">Pass 10 death saving throws</div>
+                    <div class="ach-date">March 2026</div>
+                </div>
+                <!-- 🖼 PLACEHOLDER: ach-4 → assets/profile/ach_lorekeeper.png — Достижение Lore Keeper (недоступно) -->
+                <div class="achievement-card panel locked">
+                    <div class="ach-icon">📖</div>
+                    <div class="ach-name">Lore Keeper</div>
+                    <div class="ach-desc">Complete 20 campaigns</div>
+                    <div class="ach-progress">12 / 20</div>
+                </div>
+                <!-- 🖼 PLACEHOLDER: ach-5 → assets/profile/ach_richman.png — Достижение Gold Hoarder (недоступно) -->
+                <div class="achievement-card panel locked">
+                    <div class="ach-icon">💰</div>
+                    <div class="ach-name">Gold Hoarder</div>
+                    <div class="ach-desc">Accumulate 50,000 gold</div>
+                    <div class="ach-progress">25,780 / 50,000</div>
+                </div>
+                <!-- 🖼 PLACEHOLDER: ach-6 → assets/profile/ach_legend.png — Достижение Legend (недоступно) -->
+                <div class="achievement-card panel locked">
+                    <div class="ach-icon">⭐</div>
+                    <div class="ach-name">Living Legend</div>
+                    <div class="ach-desc">Reach level 20</div>
+                    <div class="ach-progress">Lv.12 / 20</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ── History Tab ── -->
+        <div class="profile-tab-content" id="tab-history">
+            <div class="history-panel panel">
+                <div class="history-filter">
+                    <button class="hist-filter active">All</button>
+                    <button class="hist-filter">Campaigns</button>
+                    <button class="hist-filter">Sessions</button>
+                    <button class="hist-filter">PvP</button>
+                </div>
+                <div class="history-list scrollable">
+                    <div class="history-item">
+                        <div class="hist-icon">⚔️</div>
+                        <div class="hist-info">
+                            <div class="hist-title">Curse of Strahd — Session 7</div>
+                            <div class="hist-desc">Defeated Strahd von Zarovich, completed main quest</div>
+                        </div>
+                        <div class="hist-meta">
+                            <div class="hist-date">Jun 10</div>
+                            <div class="hist-xp">+2,500 XP</div>
+                        </div>
+                    </div>
+                    <div class="history-item">
+                        <div class="hist-icon">❓</div>
+                        <div class="hist-info">
+                            <div class="hist-title">Side Quest: The Lost Artifact</div>
+                            <div class="hist-desc">Retrieved the Orb of Dragonkind from bandits</div>
+                        </div>
+                        <div class="hist-meta">
+                            <div class="hist-date">Jun 8</div>
+                            <div class="hist-xp">+800 XP</div>
+                        </div>
+                    </div>
+                    <div class="history-item">
+                        <div class="hist-icon">📜</div>
+                        <div class="hist-info">
+                            <div class="hist-title">Lost Mines — Completed</div>
+                            <div class="hist-desc">Full campaign completed with party of 4</div>
+                        </div>
+                        <div class="hist-meta">
+                            <div class="hist-date">Jun 5</div>
+                            <div class="hist-xp">+5,000 XP</div>
+                        </div>
+                    </div>
+                    <div class="history-item">
+                        <div class="hist-icon">🛡️</div>
+                        <div class="hist-info">
+                            <div class="hist-title">PvP Duel vs Misha228</div>
+                            <div class="hist-desc">Victory in arena combat</div>
+                        </div>
+                        <div class="hist-meta">
+                            <div class="hist-date">Jun 3</div>
+                            <div class="hist-xp">+300 XP</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- ══ RIGHT PANEL: Edit controls (visible when editing) ══ -->
+    <div class="edit-controls" id="editControls" style="display:none;">
+        <div class="edit-controls-inner panel">
+            <div class="edit-controls-title">Editing Profile</div>
+            <div class="gold-divider"></div>
+            <button class="btn-gold" style="width:100%;margin-bottom:10px;" id="saveProfileBtn">✓ Save Changes</button>
+            <button class="btn-gold" style="width:100%;background:rgba(139,0,0,0.2);border-color:rgba(139,0,0,0.4);color:#c0392b;" id="cancelEditBtn">✕ Cancel</button>
+        </div>
+    </div>
+</div>
+
+<!-- WIP overlay -->
+<div class="wip-overlay">
+    <div class="wip-box">
+        <div class="wip-image" style="background: url('../assets/wip/wip.png') center/cover no-repeat;"></div>
+        <div class="wip-title">Work in Progress</div>
+        <div class="wip-subtitle">Coming soon, adventurer...</div>
+        <button class="btn-gold wip-close">Understood</button>
+    </div>
+</div>
+
+<!-- ══ ARCHIVE MODAL ══ -->
+<div class="archive-modal-overlay" id="archiveModal">
+    <div class="archive-modal panel">
+        <div class="modal-header">
+            <h2>📜 Game Archive</h2>
+            <button class="close-modal" id="closeArchiveBtn">&times;</button>
+        </div>
+        <div class="modal-body scrollable">
+            <div class="history-item">
+                <div class="hist-icon">⚔️</div>
+                <div class="hist-info">
+                    <div class="hist-title">Tomb of Annihilation</div>
+                    <div class="hist-desc">Ended in TPK at the final boss</div>
+                </div>
+                <div class="hist-meta">
+                    <div class="hist-date">Dec 2023</div>
+                </div>
+            </div>
+            <div class="history-item">
+                <div class="hist-icon">📜</div>
+                <div class="hist-info">
+                    <div class="hist-title">Out of the Abyss</div>
+                    <div class="hist-desc">Successfully escaped the Underdark</div>
+                </div>
+                <div class="hist-meta">
+                    <div class="hist-date">Aug 2023</div>
+                </div>
+            </div>
+            <div class="history-item">
+                <div class="hist-icon">🛡️</div>
+                <div class="hist-info">
+                    <div class="hist-title">Princes of the Apocalypse</div>
+                    <div class="hist-desc">Defeated the elemental cults</div>
+                </div>
+                <div class="hist-meta">
+                    <div class="hist-date">Jan 2023</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="../common.js"></script>
+<script src="profile.js?v=3"></script>
+</body>
+</html>

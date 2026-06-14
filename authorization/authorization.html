@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Вход в D&D Online — авторизация для игры в Dungeons & Dragons">
+    <title>DnD Online — Вход</title>
+    <link rel="stylesheet" href="../common.css">
+    <link rel="stylesheet" href="authorization.css">
+</head>
+<body>
+
+<!-- Loading Screen -->
+<div id="loadingScreen" class="loading-screen">
+    <div class="loading-logo">D&D</div>
+    <div class="loading-bar-wrap"><div class="loading-bar-fill"></div></div>
+    <div style="font-family:var(--font-cinzel);font-size:13px;color:rgba(212,175,55,0.5);letter-spacing:4px;">LOADING...</div>
+</div>
+
+<!-- Background image placeholder -->
+<!-- 🖼 PLACEHOLDER: auth-bg → assets/authorization/bg.jpg — Тёмный фоновый рисунок (подземелье/замок) -->
+<div class="auth-bg img-placeholder" data-label="bg.jpg"></div>
+
+<!-- Particles & Runes -->
+<div id="particles" class="particle-bg"></div>
+<div id="runes" class="rune-bg"></div>
+
+<!-- Decorative torches -->
+<div class="torch torch-left" aria-hidden="true">
+    <!-- 🖼 PLACEHOLDER: torch-left → assets/authorization/torch.png — Факел левый -->
+    <div class="torch-flame"></div>
+</div>
+<div class="torch torch-right" aria-hidden="true">
+    <!-- 🖼 PLACEHOLDER: torch-right → assets/authorization/torch.png — Факел правый -->
+    <div class="torch-flame"></div>
+</div>
+
+<main class="auth-main">
+    <!-- Logo / Header -->
+    <header class="auth-header">
+        <!-- 🖼 PLACEHOLDER: logo → assets/authorization/logo.png — Логотип D&D Online -->
+        <div class="auth-logo img-placeholder" data-label="logo.png"></div>
+        <h1 class="auth-title">Dungeons & Dragons</h1>
+        <p class="auth-subtitle">Online</p>
+    </header>
+
+    <!-- Login Panel -->
+    <div class="auth-panel panel corner-border" id="authPanel">
+        <div class="auth-panel-header">
+            <div class="tab-btn active" id="tabLogin" onclick="switchTab('login')">Sign In</div>
+            <div class="tab-divider">⟡</div>
+            <div class="tab-btn" id="tabRegister" onclick="window.location='../register/register.html'">Register</div>
+        </div>
+
+        <div class="gold-divider"></div>
+
+        <form class="auth-form" id="loginForm" onsubmit="handleLogin(event)">
+
+            <!-- Email field -->
+            <div class="field-group">
+                <label class="field-label" for="email">
+                    <span class="field-icon">✉</span> Email
+                </label>
+                <div class="field-wrap">
+                    <!-- 🖼 PLACEHOLDER: input-icon-email → assets/authorization/icon_email.png — Иконка email поля -->
+                    <div class="field-icon-img img-placeholder" data-label="icon_email.png"></div>
+                    <input type="email" id="email" name="email"
+                           class="input-base field-input"
+                           placeholder="your@email.com"
+                           autocomplete="email"
+                           required>
+                </div>
+            </div>
+
+            <!-- Password field -->
+            <div class="field-group">
+                <label class="field-label" for="password">
+                    <span class="field-icon">🔒</span> Password
+                </label>
+                <div class="field-wrap">
+                    <!-- 🖼 PLACEHOLDER: input-icon-password → assets/authorization/icon_pass.png — Иконка пароля -->
+                    <div class="field-icon-img img-placeholder" data-label="icon_pass.png"></div>
+                    <input type="password" id="password" name="password"
+                           class="input-base field-input"
+                           placeholder="••••••••"
+                           autocomplete="current-password"
+                           required>
+                    <button type="button" class="pass-toggle" id="passToggle" aria-label="Показать пароль">👁</button>
+                </div>
+            </div>
+
+            <div class="auth-options">
+                <label class="remember-wrap">
+                    <input type="checkbox" id="rememberMe"> 
+                    <span class="checkmark"></span>
+                    Remember me
+                </label>
+                <a href="#" class="forgot-link">Forgot password?</a>
+            </div>
+
+            <!-- Login button -->
+            <button type="submit" class="btn-gold auth-submit" id="loginBtn">
+                <!-- 🖼 PLACEHOLDER: btn-login → assets/authorization/btn_login.png — Кнопка входа -->
+                <div class="btn-img img-placeholder" data-label="btn_login.png"></div>
+                <span class="btn-text">Enter the Realm</span>
+            </button>
+
+            <div class="auth-divider">
+                <span class="divider-line"></span>
+                <span class="divider-text">or continue with</span>
+                <span class="divider-line"></span>
+            </div>
+
+            <!-- Social buttons -->
+            <div class="social-row">
+                <!-- 🖼 PLACEHOLDER: btn-google → assets/authorization/google.png — Кнопка Google -->
+                <button type="button" class="social-btn" id="googleBtn">
+                    <div class="social-icon img-placeholder" data-label="google.png"></div>
+                    <span>Google</span>
+                </button>
+                <!-- 🖼 PLACEHOLDER: btn-discord → assets/authorization/discord.png — Кнопка Discord -->
+                <button type="button" class="social-btn" id="discordBtn">
+                    <div class="social-icon img-placeholder" data-label="discord.png"></div>
+                    <span>Discord</span>
+                </button>
+            </div>
+        </form>
+
+        <p class="auth-footer-text">
+            No account? 
+            <a href="../register/register.html" class="auth-link">Create one →</a>
+        </p>
+    </div>
+
+    <!-- Bottom decoration -->
+    <div class="auth-bottom-deco" aria-hidden="true">
+        <!-- 🖼 PLACEHOLDER: bottom-deco → assets/authorization/bottom_deco.png — Нижний декоративный элемент -->
+        <div class="img-placeholder bottom-deco-img" data-label="bottom_deco.png"></div>
+    </div>
+</main>
+
+<!-- Error message -->
+<div class="toast" id="authToast"></div>
+
+<script src="../common.js"></script>
+<script src="authorization.js"></script>
+</body>
+</html>

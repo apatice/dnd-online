@@ -1,0 +1,202 @@
+body {
+    margin: 0;
+    padding: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    position: relative;
+    font-family: 'Cinzel', 'Times New Roman', serif;
+}
+
+.bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* asset: assets/archive/bg.png */
+    border: 2px dashed #d4af37;
+    background: transparent;
+    box-sizing: border-box;
+}
+
+.header {
+    position: absolute;
+    top: 140px;
+    left: 440px;
+    font-size: 60px;
+    font-weight: bold;
+    color: #d4af37;
+    text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.8);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+}
+
+.archive-list {
+    position: absolute;
+    top: 60px;
+    left: 30px;
+    width: 700px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.archive-item {
+    position: relative;
+    width: 100%;
+    height: 120px;
+}
+
+.archive-frame {
+    position: absolute;
+    width: 400%;
+    height: 400%;
+    left: 200px;
+    /* asset: assets/archive/frame.png */
+    border: 2px dashed #d4af37;
+    background: rgba(30, 20, 10, 0.4);
+    box-sizing: border-box;
+}
+
+.archive-name {
+    position: absolute;
+    left: 240px;
+    top: 230px;
+    font-size: 28px;
+    font-weight: bold;
+    color: #ffffff;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+.archive-name-input {
+    position: absolute;
+    left: 238px;
+    top: 228px;
+    font-size: 28px;
+    font-weight: bold;
+    color: #ffffff;
+    background: rgba(0, 0, 0, 0.5);
+    border: 2px solid #d4af37;
+    padding: 2px 8px;
+    width: 496px;
+    outline: none;
+    font-family: 'Cinzel', 'Times New Roman', serif;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+    z-index: 10;
+    display: none;
+    box-sizing: border-box;
+}
+
+.archive-date {
+    position: absolute;
+    left: 900px;
+    top: 225px;
+    font-size: 18px;
+    color: #cccccc;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+}
+
+.edit-btn {
+    position: absolute;
+    right: 150px;
+    top: 248px;
+    transform: translateY(-50%);
+    width: 70px;
+    height: 70px;
+    left: 1000px;
+    /* asset: assets/archive/edit.png */
+    border: 2px dashed #d4af37;
+    background: rgba(30, 20, 10, 0.6);
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    background-color: transparent;
+    z-index: 10;
+}
+
+.edit-btn:hover {
+    transform: translateY(-50%) scale(1.1);
+}
+
+.delete-btn {
+    position: absolute;
+    right: 40px;
+    top: 248px;
+    transform: translateY(-50%);
+    width: 70px;
+    height: 70px;
+    left: 1070px;
+    /* asset: assets/archive/delete.png */
+    border: 2px dashed #d4af37;
+    background: rgba(30, 20, 10, 0.6);
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    background-color: transparent;
+    z-index: 10;
+}
+
+.delete-btn:hover {
+    transform: translateY(-50%) scale(1.1);
+}
+
+.back-btn {
+    position: absolute;
+    bottom: 30px;
+    right: 230px;
+    width: 260px;
+    height: 300px;
+    /* asset: assets/archive/back.png */
+    border: 2px dashed #d4af37;
+    background: rgba(30, 20, 10, 0.6);
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    background-color: transparent;
+}
+
+.back-btn:hover {
+    transform: scale(1.1);
+}
+
+.save-btn {
+    position: absolute;
+    right: 150px;
+    top: 248px;
+    transform: translateY(-50%);
+    width: 70px;
+    height: 70px;
+    left: 1000px;
+    /* asset: assets/archive/save.png */
+    border: 2px dashed #d4af37;
+    background: rgba(30, 20, 10, 0.6);
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    z-index: 10;
+    background-color: transparent;
+    display: none;
+}
+
+.save-btn:hover {
+    transform: translateY(-50%) scale(1.1);
+}
+
+.cancel-btn {
+    position: absolute;
+    right: 40px;
+    top: 248px;
+    transform: translateY(-50%);
+    width: 70px;
+    height: 70px;
+    left: 1070px;
+    /* asset: assets/archive/cancel.png */
+    border: 2px dashed #d4af37;
+    background: rgba(30, 20, 10, 0.6);
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    z-index: 10;
+    background-color: transparent;
+    display: none;
+}
+
+.cancel-btn:hover {
+    transform: translateY(-50%) scale(1.1);
+}

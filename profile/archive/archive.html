@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Archive</title>
+    <link rel="stylesheet" href="archive.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="bg"></div>
+    
+    <div class="header">Game Archives</div>
+    
+    <div class="archive-list">
+        <div class="archive-item">
+            <div class="archive-frame"></div>
+            <div class="archive-name">The Lost Crown Campaign</div>
+            <div class="archive-date">Created: 15.03.2024</div>
+            <button class="edit-btn"></button>
+            <button class="delete-btn"></button>
+        </div>
+        
+        <div class="archive-item">
+            <div class="archive-frame"></div>
+            <div class="archive-name">Dragon's Lair Adventure</div>
+            <div class="archive-date">Created: 22.02.2024</div>
+            <button class="edit-btn"></button>
+            <button class="delete-btn"></button>
+        </div>
+        
+        <div class="archive-item">
+            <div class="archive-frame"></div>
+            <div class="archive-name">Frozen Throne Quest</div>
+            <div class="archive-date">Created: 10.01.2024</div>
+            <button class="edit-btn"></button>
+            <button class="delete-btn"></button>
+        </div>
+        
+        <div class="archive-item">
+            <div class="archive-frame"></div>
+            <div class="archive-name">Shadow Realm Mystery</div>
+            <div class="archive-date">Created: 05.12.2023</div>
+            <button class="edit-btn"></button>
+            <button class="delete-btn"></button>
+        </div>
+        
+        <div class="archive-item">
+            <div class="archive-frame"></div>
+            <div class="archive-name">Desert Temple Raid</div>
+            <div class="archive-date">Created: 18.11.2023</div>
+            <button class="edit-btn"></button>
+            <button class="delete-btn"></button>
+        </div>
+    </div>
+    
+    <button class="back-btn"></button>
+    
+    <script src="archive.js"></script>
+    <script>
+        window.addEventListener('wheel', function(e) {
+            if (e.ctrlKey) {
+                e.preventDefault();
+            }
+        }, { passive: false });
+    </script>
+</body>
+</html>

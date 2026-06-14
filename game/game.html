@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="D&D Online — игровой экран">
+    <title>DnD Online — Игра</title>
+    <link rel="stylesheet" href="../common.css">
+    <link rel="stylesheet" href="game.css">
+</head>
+<body>
+
+<!-- 🖼 PLACEHOLDER: game-bg → assets/game/bg.jpg — Фон игрового экрана (игровое поле/карта подземелья) -->
+<div class="game-bg img-placeholder" data-label="bg.jpg"></div>
+
+<!-- ══ GAME MAP / ARENA ══ -->
+<div class="game-map" id="gameMap">
+    <div class="map-layer" id="mapLayer">
+        <div class="game-map-img"></div>
+        <div class="map-grid" id="mapGrid"></div>
+        
+        <!-- Retro Decorations -->
+        <div class="retro-castle" style="left: 45%; top: 40%;"></div>
+
+        <div class="retro-tree" style="left: 48%; top: 46%;"></div>
+        <div class="retro-tree" style="left: 42%; top: 52%;"></div>
+        <div class="retro-tree" style="left: 55%; top: 55%;"></div>
+        <div class="retro-tree" style="left: 58%; top: 42%;"></div>
+        <div class="retro-tree" style="left: 38%; top: 45%;"></div>
+        <div class="retro-tree" style="left: 35%; top: 38%;"></div>
+        <div class="retro-tree" style="left: 40%; top: 35%;"></div>
+        <div class="retro-tree" style="left: 50%; top: 32%;"></div>
+        <div class="retro-tree" style="left: 60%; top: 38%;"></div>
+        <div class="retro-tree" style="left: 65%; top: 48%;"></div>
+        <div class="retro-tree" style="left: 62%; top: 58%;"></div>
+        <div class="retro-tree" style="left: 52%; top: 62%;"></div>
+        <div class="retro-tree" style="left: 45%; top: 65%;"></div>
+        <div class="retro-tree" style="left: 35%; top: 60%;"></div>
+        
+        <div class="retro-rock" style="left: 44%; top: 45%;"></div>
+        <div class="retro-rock" style="left: 56%; top: 48%;"></div>
+        <div class="retro-rock" style="left: 52%; top: 42%;"></div>
+        <div class="retro-rock" style="left: 39%; top: 55%;"></div>
+        <div class="retro-rock" style="left: 46%; top: 58%;"></div>
+        <div class="retro-rock" style="left: 60%; top: 52%;"></div>
+        <div class="retro-rock" style="left: 32%; top: 42%;"></div>
+        <div class="retro-rock" style="left: 68%; top: 45%;"></div>
+        
+        <div class="retro-crystal" style="left: 41%; top: 48%;"></div>
+        <div class="retro-crystal" style="left: 58%; top: 45%;"></div>
+        <div class="retro-crystal" style="left: 48%; top: 38%;"></div>
+        <div class="retro-crystal" style="left: 54%; top: 60%;"></div>
+        <div class="retro-crystal" style="left: 35%; top: 50%;"></div>
+        <div class="retro-crystal" style="left: 65%; top: 35%;"></div>
+        
+        <!-- Player Tokens -->
+        <div class="player-token" id="playerToken1" style="left:50%;top:50%; background: url('../assets/avatars/default.png') center/cover no-repeat; border-radius: 50%;">
+            <div class="token-name">Aldric</div>
+        </div>
+        <div class="player-token" id="playerToken2" style="left:46%;top:45%; background: url('../assets/avatars/1.png') center/cover no-repeat; border-radius: 50%;">
+            <div class="token-name">Zira</div>
+        </div>
+        <div class="player-token" id="playerToken3" style="left:54%;top:52%; background: url('../assets/avatars/7.png') center/cover no-repeat; border-radius: 50%;">
+            <div class="token-name">Gorrim</div>
+        </div>
+        <div class="player-token" id="playerToken4" style="left:51%;top:42%; background: url('../assets/avatars/4.png') center/cover no-repeat; border-radius: 50%;">
+            <div class="token-name">Misha228</div>
+        </div>
+    </div>
+</div>
+
+<!-- ══ TOP HUD ══ -->
+<div class="hud-top">
+    <!-- 🖼 PLACEHOLDER: hud-top-frame → assets/game/hud_top.png — Рамка верхнего HUD -->
+    <div class="hud-top-frame img-placeholder" data-label="hud_top.png"></div>
+    <div class="hud-top-content">
+        <div class="hud-campaign-name">⚔ Curse of Strahd</div>
+        <div class="hud-session">Session 7 · Round <span id="roundNum">3</span></div>
+        <div class="hud-turn">
+            <div class="turn-indicator" style="justify-content: center; min-width: 120px;">
+                <span class="turn-text" style="text-transform: uppercase;">Your Turn</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ══ LEFT: Character Sheet / Status ══ -->
+<div class="char-panel left-char-panel" id="charPanel">
+    <!-- 🖼 PLACEHOLDER: char-panel-frame → assets/game/char_panel.png — Рамка панели персонажа -->
+    <div class="char-panel-frame img-placeholder" data-label="char_panel.png"></div>
+    <div class="char-panel-content">
+        <!-- Portrait -->
+        <div class="ingame-portrait" id="ingamePortraitLeft" style="background: url('../assets/avatars/default.png') center/cover no-repeat; border-radius: 8px;"></div>
+        <div class="char-panel-name">Aldric</div>
+
+        <!-- HP Bar -->
+        <div class="resource-bar-section">
+            <div class="resource-label">❤ HP</div>
+            <div class="resource-bar hp-bar">
+                <div class="resource-fill hp-fill" id="hpFill" style="width:85%"></div>
+                <span class="resource-text" id="hpText">85 / 100</span>
+            </div>
+        </div>
+
+        <!-- MP Bar -->
+        <div class="resource-bar-section">
+            <div class="resource-label">⚡ Spell Slots</div>
+            <div class="resource-bar mp-bar">
+                <div class="resource-fill mp-fill" id="mpFill" style="width:70%"></div>
+                <span class="resource-text" id="mpText">42 / 60</span>
+            </div>
+        </div>
+
+        <!-- Conditions -->
+        <div class="conditions-section">
+            <div class="condition-tag">Blessed</div>
+            <div class="condition-tag">Shielded</div>
+        </div>
+
+        <!-- Stats grid -->
+        <div class="char-stats-grid">
+            <div class="cs-stat"><div class="cs-val">18</div><div class="cs-lab">AC</div></div>
+            <div class="cs-stat"><div class="cs-val">+5</div><div class="cs-lab">ATK</div></div>
+            <div class="cs-stat"><div class="cs-val">16</div><div class="cs-lab">STR</div></div>
+            <div class="cs-stat"><div class="cs-val">10</div><div class="cs-lab">DEX</div></div>
+            <div class="cs-stat"><div class="cs-val">14</div><div class="cs-lab">CON</div></div>
+            <div class="cs-stat"><div class="cs-val">13</div><div class="cs-lab">WIS</div></div>
+        </div>
+
+        <!-- Quick Skills -->
+        <div class="quick-skills">
+            <div class="skill-slot" title="Attack"><div class="skill-emoji">⚔️</div><div class="skill-label">Attack</div></div>
+            <div class="skill-slot" title="Smite"><div class="skill-emoji">✨</div><div class="skill-label">Smite</div></div>
+            <div class="skill-slot" title="Heal"><div class="skill-emoji">💖</div><div class="skill-label">Heal</div></div>
+            <div class="skill-slot" title="Shield"><div class="skill-emoji">🛡️</div><div class="skill-label">Shield</div></div>
+            <div class="skill-slot" title="Potion"><div class="skill-emoji">🧪</div><div class="skill-label">Potion</div></div>
+            <div class="skill-slot" title="Scroll"><div class="skill-emoji">📜</div><div class="skill-label">Scroll</div></div>
+        </div>
+    </div>
+</div>
+
+<!-- ══ CHAT PANEL ══ -->
+<div class="game-chat-frame open" id="chatFrame">
+    <!-- 🖼 PLACEHOLDER: chat-frame-bg → assets/game/chat_frame.png — Рамка чата -->
+    <div class="chat-frame-bg img-placeholder" data-label="chat_frame.png"></div>
+    <div class="game-chat-content">
+        <div class="chat-header-strip">
+            <span>⚔ Campaign Chat</span>
+            <div class="chat-tabs">
+                <button class="chat-tab active" data-chat="all">All</button>
+                <button class="chat-tab" data-chat="party">Party</button>
+                <button class="chat-tab" data-chat="dm">DM</button>
+            </div>
+        </div>
+        <div class="game-chat-messages scrollable" id="chatMessages">
+            <div class="chat-msg system">🎲 Session 7 has begun!</div>
+            <div class="chat-msg dm"><span class="msg-author dm-author">DM:</span> You enter the dark castle hall...</div>
+            <div class="chat-msg player"><span class="msg-author">Misha228:</span> I check for traps! [rolled 17]</div>
+            <div class="chat-msg player self"><span class="msg-author self-author">You:</span> I cast Detect Evil and Good</div>
+            <div class="chat-msg dm"><span class="msg-author dm-author">DM:</span> Aldric senses a dark presence to the north</div>
+            <div class="chat-msg dice"><span>🎲</span> Zira rolled <strong>Natural 20!</strong> on Perception</div>
+            <div class="chat-msg player"><span class="msg-author">Gorrim:</span> Then I CHARGE!</div>
+        </div>
+        <div class="chat-input-row">
+            <!-- 🖼 PLACEHOLDER: chat-input-bg → assets/game/chat_input.png — Рамка поля ввода чата -->
+            <div class="chat-input-bg img-placeholder" data-label="chat_input.png"></div>
+            <input type="text" class="game-chat-input" id="chatInput" placeholder="Type or roll... (/roll 1d20)">
+            <button class="chat-send-btn-game" id="chatSendBtn">
+                <!-- 🖼 PLACEHOLDER: chat-send → assets/game/chat_send.png — Кнопка отправки сообщения -->
+                <div class="img-placeholder chat-send-img" data-label="chat_send.png"></div>
+                <span>→</span>
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- ══ DICE PANEL: d6 3D ══ -->
+<div class="dice-panel" id="dicePanel" style="display:none;">
+    <div class="dice-panel-content">
+        <div class="dice-title">🎲 Roll Dice</div>
+
+        <!-- 3D Dice Canvas -->
+        <div class="dice3d-wrap" id="dice3dWrap" style="position: relative;">
+            <canvas id="diceCanvas" width="160" height="160"></canvas>
+            <div id="dice3dOverlayText" style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; pointer-events: none; font-family: var(--font-cinzel-deco); font-size: 42px; color: var(--color-gold); text-shadow: 0 0 15px rgba(212,175,55,0.8); z-index: 10;"></div>
+        </div>
+
+        <!-- Other dice grid -->
+        <div class="dice-grid">
+            <button class="die-btn" data-sides="4">d4</button>
+            <button class="die-btn active-die" data-sides="6">d6</button>
+            <button class="die-btn" data-sides="8">d8</button>
+            <button class="die-btn" data-sides="10">d10</button>
+            <button class="die-btn" data-sides="12">d12</button>
+            <button class="die-btn" data-sides="20">d20</button>
+            <button class="die-btn" data-sides="100" id="d100Btn">d100</button>
+        </div>
+
+
+
+        <!-- Result -->
+        <div class="dice-result" id="diceResult">
+            <span class="dice-result-text" id="diceResultText">Roll!</span>
+        </div>
+        <div class="dice-history" id="diceHistory"></div>
+    </div>
+</div>
+
+<!-- ══ ACTION PANEL ══ -->
+<div class="action-panel" id="actionPanel" style="display:none;">
+    <!-- 🖼 PLACEHOLDER: action-panel-bg → assets/game/action_panel.png — Рамка панели действий -->
+    <div class="action-panel-bg img-placeholder" data-label="action_panel.png"></div>
+    <div class="action-panel-content">
+        <div class="action-title">Actions</div>
+        <div class="action-tabs">
+            <button class="at-btn active">Action</button>
+            <button class="at-btn">Bonus</button>
+            <button class="at-btn">Reaction</button>
+            <button class="at-btn">Free</button>
+        </div>
+        <div class="actions-list">
+            <!-- 🖼 PLACEHOLDER: action-attack → assets/game/action_attack.png — Действие атаки -->
+            <div class="action-item" onclick="useAction('Attack')">
+                <div class="action-item-icon" style="font-size: 24px; display: flex; align-items: center; justify-content: center; border: none; background: transparent;">⚔️</div>
+                <div class="action-item-info">
+                    <div class="action-item-name">Attack</div>
+                    <div class="action-item-desc">Melee: Holy Avenger +2d8</div>
+                </div>
+                <div class="action-item-cost">1 Action</div>
+            </div>
+            <!-- 🖼 PLACEHOLDER: action-cast → assets/game/action_cast.png — Действие заклинания -->
+            <div class="action-item" onclick="useAction('Divine Smite')">
+                <div class="action-item-icon" style="font-size: 24px; display: flex; align-items: center; justify-content: center; border: none; background: transparent;">✨</div>
+                <div class="action-item-info">
+                    <div class="action-item-name">Divine Smite</div>
+                    <div class="action-item-desc">2d8 radiant on hit</div>
+                </div>
+                <div class="action-item-cost">Spell Slot</div>
+            </div>
+            <!-- 🖼 PLACEHOLDER: action-heal → assets/game/action_heal.png — Действие лечения -->
+            <div class="action-item" onclick="useAction('Lay on Hands')">
+                <div class="action-item-icon" style="font-size: 24px; display: flex; align-items: center; justify-content: center; border: none; background: transparent;">💖</div>
+                <div class="action-item-info">
+                    <div class="action-item-name">Lay on Hands</div>
+                    <div class="action-item-desc">Restore 40 HP</div>
+                </div>
+                <div class="action-item-cost">1 Action</div>
+            </div>
+            <!-- 🖼 PLACEHOLDER: action-shield → assets/game/action_shield.png — Действие защиты -->
+            <div class="action-item" onclick="useAction('Shield of Faith')">
+                <div class="action-item-icon" style="font-size: 24px; display: flex; align-items: center; justify-content: center; border: none; background: transparent;">🛡️</div>
+                <div class="action-item-info">
+                    <div class="action-item-name">Shield of Faith</div>
+                    <div class="action-item-desc">+2 AC for 10 min</div>
+                </div>
+                <div class="action-item-cost">1 Spell Slot</div>
+            </div>
+            <!-- 🖼 PLACEHOLDER: action-potion → assets/game/action_potion.png — Действие зелья -->
+            <div class="action-item" onclick="useAction('Potion of Healing')">
+                <div class="action-item-icon" style="font-size: 24px; display: flex; align-items: center; justify-content: center; border: none; background: transparent;">🧪</div>
+                <div class="action-item-info">
+                    <div class="action-item-name">Potion of Healing</div>
+                    <div class="action-item-desc">2d4+2 HP restored</div>
+                </div>
+                <div class="action-item-cost">Bonus Action</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ══ BOTTOM NAV BUTTONS ══ -->
+<nav class="game-nav" id="gameNav">
+    <!-- 🖼 PLACEHOLDER: game-nav-bg → assets/game/nav_bar.png — Рамка нижней навигации -->
+    <div class="game-nav-bg img-placeholder" data-label="nav_bar.png"></div>
+    <div class="game-nav-buttons">
+        <button class="gnav-btn" id="chatToggle" title="Chat">
+            <div class="gnav-icon" style="font-size: 20px; border: none; display: flex; align-items: center; justify-content: center;">💬</div>
+            <span class="gnav-label">Chat</span>
+        </button>
+        <button class="gnav-btn" id="sheetToggle" title="Character Sheet">
+            <div class="gnav-icon" style="font-size: 20px; border: none; display: flex; align-items: center; justify-content: center;">📝</div>
+            <span class="gnav-label">Sheet</span>
+        </button>
+        <button class="gnav-btn" id="diceToggle" title="Dice">
+            <div class="gnav-icon" style="font-size: 20px; border: none; display: flex; align-items: center; justify-content: center;">🎲</div>
+            <span class="gnav-label">Dice</span>
+        </button>
+        <button class="gnav-btn" id="actionToggle" title="Actions">
+            <div class="gnav-icon" style="font-size: 20px; border: none; display: flex; align-items: center; justify-content: center;">⚔️</div>
+            <span class="gnav-label">Actions</span>
+        </button>
+        <button class="gnav-btn" id="menuToggle" title="Menu">
+            <div class="gnav-icon" style="font-size: 20px; border: none; display: flex; align-items: center; justify-content: center;">⚙️</div>
+            <span class="gnav-label">Menu</span>
+        </button>
+        <button class="gnav-btn" id="endTurnBtn" title="End Turn" style="border-color:rgba(212,175,55,0.4);color:var(--color-gold);">
+            <div class="gnav-icon" style="font-size: 20px; border: none; display: flex; align-items: center; justify-content: center; color:var(--color-gold);">⏳</div>
+            <span class="gnav-label" style="color:var(--color-gold);">End Turn</span>
+        </button>
+    </div>
+</nav>
+
+<!-- ══ PLAYERS LIST (right side) ══ -->
+<div class="players-list-panel panel" id="playersPanel">
+    <!-- 🖼 PLACEHOLDER: players-panel-bg → assets/game/players_panel.png — Рамка списка игроков -->
+    <div class="players-panel-bg img-placeholder" data-label="players_panel.png"></div>
+    <div class="players-title">Players</div>
+    <div class="players-list">
+        <div class="player-item active-player">
+            <!-- 🖼 PLACEHOLDER: player-portrait-you → assets/game/portrait_aldric.png — Портрет вашего персонажа в списке -->
+            <div class="player-portrait" id="playerPortraitRight" style="background: url('../assets/avatars/default.png') center/cover no-repeat; border-radius: 50%;"></div>
+            <div class="player-status-info">
+                <div class="player-name-sm">Aldric (You)</div>
+                <div class="player-hp-mini">❤ 85/100</div>
+            </div>
+            <div class="player-turn-dot active-dot"></div>
+        </div>
+        <div class="player-item">
+            <!-- 🖼 PLACEHOLDER: player-portrait-zira → assets/game/portrait_zira.png — Портрет Zira в списке -->
+            <div class="player-portrait" style="background: url('../assets/avatars/1.png') center/cover no-repeat; border-radius: 50%;"></div>
+            <div class="player-status-info">
+                <div class="player-name-sm">Zira</div>
+                <div class="player-hp-mini">❤ 54/60</div>
+            </div>
+            <div class="player-turn-dot"></div>
+        </div>
+        <div class="player-item">
+            <!-- 🖼 PLACEHOLDER: player-portrait-gorrim → assets/game/portrait_gorrim.png — Портрет Gorrim в списке -->
+            <div class="player-portrait" style="background: url('../assets/avatars/7.png') center/cover no-repeat; border-radius: 50%;"></div>
+            <div class="player-status-info">
+                <div class="player-name-sm">Gorrim</div>
+                <div class="player-hp-mini">❤ 120/140</div>
+            </div>
+            <div class="player-turn-dot"></div>
+        </div>
+        <!-- DM -->
+        <div class="player-item dm-item">
+            <!-- 🖼 PLACEHOLDER: dm-portrait → assets/game/portrait_dm.png — Портрет Мастера подземелья -->
+            <div class="player-portrait" style="background: url('../assets/avatars/4.png') center/cover no-repeat; border-radius: 50%;"></div>
+            <div class="player-status-info">
+                <div class="player-name-sm">Misha228 [DM]</div>
+                <div class="player-hp-mini">👑 Dungeon Master</div>
+            </div>
+            <div class="player-turn-dot"></div>
+        </div>
+    </div>
+</div>
+
+<!-- ══ GAME MENU OVERLAY ══ -->
+<div class="game-menu-overlay" id="menuFrame" style="display:none;">
+    <!-- 🖼 PLACEHOLDER: menu-frame-bg → assets/game/menu_frame.png — Рамка игрового меню -->
+    <div class="menu-frame-bg img-placeholder" data-label="menu_frame.png"></div>
+    <div class="game-menu-content panel">
+        <button class="menu-close-btn" id="menuCross">✕</button>
+        <div class="game-menu-title">⚙ Game Menu</div>
+        <div class="gold-divider"></div>
+        <div class="game-menu-options">
+            <button class="game-menu-opt" id="handbookBtn">
+                <span>📖 Handbook</span>
+            </button>
+            <button class="game-menu-opt" id="playersBtn">
+                <span>👥 Players</span>
+            </button>
+            <button class="game-menu-opt" id="settingsGameBtn">
+                <span>⚙ Settings</span>
+            </button>
+            <button class="game-menu-opt danger" id="exitGameBtn">
+                <span>🚪 Leave Game</span>
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- ══ DICE ROLL NOTIFICATION ══ -->
+<div class="roll-notification" id="rollNotif" style="display:none;">
+    <!-- 🖼 PLACEHOLDER: roll-notif-bg → assets/game/roll_notif.png — Фон уведомления о броске -->
+    <div class="roll-notif-bg img-placeholder" data-label="roll_notif.png"></div>
+    <div class="roll-notif-content">
+        <div class="roll-die-icon">🎲</div>
+        <div class="roll-result-num" id="rollNum">—</div>
+        <div class="roll-result-label" id="rollLabel">Natural 20!</div>
+    </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="../common.js"></script>
+<script src="dice3d.js"></script>
+<script src="game.js"></script>
+</body>
+</html>

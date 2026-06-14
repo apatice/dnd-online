@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="D&D Online — управление персонажами">
+    <title>DnD Online — Персонажи</title>
+    <link rel="stylesheet" href="../common.css">
+    <link rel="stylesheet" href="characters.css">
+</head>
+<body>
+
+<div id="loadingScreen" class="loading-screen">
+    <div class="loading-logo">D&D</div>
+    <div class="loading-bar-wrap"><div class="loading-bar-fill"></div></div>
+</div>
+
+<div id="particles" class="particle-bg"></div>
+<div id="runes" class="rune-bg"></div>
+
+<!-- 🖼 PLACEHOLDER: chars-bg → assets/characters/bg.jpg — Фон страницы персонажей (тронный зал/кузница) -->
+<div class="chars-bg img-placeholder" data-label="bg.jpg"></div>
+<div class="chars-bg-overlay"></div>
+
+<!-- Header -->
+<header class="chars-header">
+    <a href="../main/main.html" class="back-btn">
+        <!-- Кнопка назад -->
+        <span>← Main Menu</span>
+    </a>
+    <h1 class="chars-title">⚔ Characters</h1>
+    <div class="chars-header-right">
+        <div class="chars-count">3 / 6 slots used</div>
+    </div>
+</header>
+
+<main class="chars-main">
+    <!-- ── Action Buttons ── -->
+    <div class="chars-actions">
+        <button class="char-action-big" id="createCharBtn">
+            <!-- 🖼 PLACEHOLDER: btn-create-char → assets/characters/add.png — Большая кнопка создания персонажа -->
+            <div class="char-action-bg img-placeholder" data-label="add.png"></div>
+            <div class="char-action-inner">
+                <div class="char-action-icon plus-icon">+</div>
+                <div class="char-action-title">Create New</div>
+                <div class="char-action-desc">Build a character from scratch</div>
+            </div>
+        </button>
+
+        <button class="char-action-big" id="yourCharsBtn">
+            <!-- 🖼 PLACEHOLDER: btn-your-chars → assets/characters/your.png — Кнопка ваших персонажей -->
+            <div class="char-action-bg img-placeholder" data-label="your.png"></div>
+            <div class="char-action-inner">
+                <div class="char-action-icon">📖</div>
+                <div class="char-action-title">Your Characters</div>
+                <div class="char-action-desc">View and manage your roster</div>
+            </div>
+        </button>
+
+        <button class="char-action-big" id="premadeBtn">
+            <!-- 🖼 PLACEHOLDER: btn-premade → assets/characters/pre-made.png — Кнопка готовых персонажей -->
+            <div class="char-action-bg img-placeholder" data-label="pre-made.png"></div>
+            <div class="char-action-inner">
+                <div class="char-action-icon">🎭</div>
+                <div class="char-action-title">Pre-Made</div>
+                <div class="char-action-desc">Choose a ready-to-play character</div>
+            </div>
+        </button>
+    </div>
+
+    <!-- ── Character Roster ── -->
+    <div class="chars-section panel">
+        <div class="chars-section-header">
+            <h2 class="chars-section-title">Your Roster</h2>
+            <div class="chars-filter">
+                <button class="cf-btn active">All</button>
+                <button class="cf-btn">Active</button>
+                <button class="cf-btn">Retired</button>
+            </div>
+        </div>
+
+        <div class="chars-grid">
+            <!-- Character 1: Active -->
+            <div class="char-card panel active-char" id="charCard1">
+                <div class="char-card-badge active-badge">ACTIVE</div>
+                <!-- 🖼 PLACEHOLDER: char-art-1 → assets/characters/char_aldric.png — Арт персонажа Aldric Stormhand -->
+                <div class="char-card-art" style="background: url('../assets/characters/char_aldric.png') top center/cover no-repeat;"></div>
+                <div class="char-card-body">
+                    <div class="char-card-name">Aldric Stormhand</div>
+                    <div class="char-card-class">Paladin</div>
+                    <div class="char-card-race">Human · Level 8</div>
+                    <div class="char-card-stats">
+                        <div class="ccs"><span>❤</span> 85/100</div>
+                        <div class="ccs"><span>⚡</span> 42/60</div>
+                        <div class="ccs"><span>🛡</span> AC18</div>
+                    </div>
+                </div>
+                <div class="char-card-actions">
+                    <button class="cca-btn primary" onclick="selectChar(1)">⚔ Set Active</button>
+                    <button class="cca-btn" onclick="viewChar(1)">👁 View</button>
+                    <button class="cca-btn danger" onclick="confirmDelete(1)">🗑</button>
+                </div>
+            </div>
+
+            <!-- Character 2 -->
+            <div class="char-card panel" id="charCard2">
+                <!-- 🖼 PLACEHOLDER: char-art-2 → assets/characters/char_zira.png — Арт персонажа Zira Moonshadow -->
+                <div class="char-card-art" style="background: url('../assets/characters/char_zira.png') top center/cover no-repeat;"></div>
+                <div class="char-card-body">
+                    <div class="char-card-name">Zira Moonshadow</div>
+                    <div class="char-card-class">Rogue</div>
+                    <div class="char-card-race">Elf · Level 6</div>
+                    <div class="char-card-stats">
+                        <div class="ccs"><span>❤</span> 54/60</div>
+                        <div class="ccs"><span>⚡</span> 30/30</div>
+                        <div class="ccs"><span>🛡</span> AC15</div>
+                    </div>
+                </div>
+                <div class="char-card-actions">
+                    <button class="cca-btn primary" onclick="selectChar(2)">⚔ Set Active</button>
+                    <button class="cca-btn" onclick="viewChar(2)">👁 View</button>
+                    <button class="cca-btn danger" onclick="confirmDelete(2)">🗑</button>
+                </div>
+            </div>
+
+            <!-- Character 3 -->
+            <div class="char-card panel" id="charCard3">
+                <!-- 🖼 PLACEHOLDER: char-art-3 → assets/characters/char_gorrim.png — Арт персонажа Gorrim Ironbeard -->
+                <div class="char-card-art" style="background: url('../assets/characters/char_gorrim.png') top/cover no-repeat;"></div>
+                <div class="char-card-body">
+                    <div class="char-card-name">Gorrim Ironbeard</div>
+                    <div class="char-card-class">Barbarian</div>
+                    <div class="char-card-race">Dwarf · Level 11</div>
+                    <div class="char-card-stats">
+                        <div class="ccs"><span>❤</span> 120/140</div>
+                        <div class="ccs"><span>⚡</span> 0/0</div>
+                        <div class="ccs"><span>🛡</span> AC16</div>
+                    </div>
+                </div>
+                <div class="char-card-actions">
+                    <button class="cca-btn primary" onclick="selectChar(3)">⚔ Set Active</button>
+                    <button class="cca-btn" onclick="viewChar(3)">👁 View</button>
+                    <button class="cca-btn danger" onclick="confirmDelete(3)">🗑</button>
+                </div>
+            </div>
+
+            <!-- Empty slots -->
+            <div class="char-slot-empty" id="emptySlot1">
+                <!-- 🖼 PLACEHOLDER: empty-slot → assets/characters/slot_empty.png — Пустой слот персонажа -->
+                <div class="empty-slot-img img-placeholder" data-label="slot_empty.png"></div>
+                <div class="empty-slot-icon">+</div>
+                <div class="empty-slot-text">Empty Slot</div>
+                <button class="btn-gold empty-slot-btn" onclick="document.getElementById('createCharBtn').click()">Create</button>
+            </div>
+            <div class="char-slot-empty">
+                <div class="empty-slot-img img-placeholder" data-label="slot_empty.png"></div>
+                <div class="empty-slot-icon">+</div>
+                <div class="empty-slot-text">Empty Slot</div>
+                <button class="btn-gold empty-slot-btn" onclick="document.getElementById('createCharBtn').click()">Create</button>
+            </div>
+            <div class="char-slot-empty">
+                <div class="empty-slot-img img-placeholder" data-label="slot_empty.png"></div>
+                <div class="empty-slot-icon">+</div>
+                <div class="empty-slot-text">Empty Slot</div>
+                <button class="btn-gold empty-slot-btn" onclick="document.getElementById('createCharBtn').click()">Create</button>
+            </div>
+        </div>
+    </div>
+</main>
+
+<!-- WIP overlay -->
+<div class="wip-overlay">
+    <div class="wip-box">
+        <div class="wip-image" style="background: url('../assets/wip/wip.png') center/cover no-repeat;"></div>
+        <div class="wip-title">Work in Progress</div>
+        <div class="wip-subtitle">Character creation is coming soon...</div>
+        <button class="btn-gold wip-close">Understood</button>
+    </div>
+</div>
+
+<script src="../common.js"></script>
+<script src="characters.js"></script>
+</body>
+</html>

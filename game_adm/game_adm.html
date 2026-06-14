@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="D&D Online — панель управления игрой (DM)">
+    <title>DnD Online — Game Admin</title>
+    <link rel="stylesheet" href="../common.css">
+    <link rel="stylesheet" href="../game/game.css">
+    <link rel="stylesheet" href="game_adm.css">
+</head>
+<body>
+
+<!-- Background Map Area -->
+<div class="game-bg"></div>
+<div class="game-map" id="gameMap">
+    <div class="map-layer" id="mapLayer">
+        <div class="game-map-img"></div>
+        <div class="map-grid" id="mapGrid"></div>
+        
+        <!-- Retro Decorations -->
+        <div class="retro-castle" style="left: 45%; top: 40%;"></div>
+
+        <div class="retro-tree" style="left: 48%; top: 46%;"></div>
+        <div class="retro-tree" style="left: 42%; top: 52%;"></div>
+        <div class="retro-tree" style="left: 55%; top: 55%;"></div>
+        <div class="retro-tree" style="left: 58%; top: 42%;"></div>
+        <div class="retro-tree" style="left: 38%; top: 45%;"></div>
+        <div class="retro-tree" style="left: 35%; top: 38%;"></div>
+        <div class="retro-tree" style="left: 40%; top: 35%;"></div>
+        <div class="retro-tree" style="left: 50%; top: 32%;"></div>
+        <div class="retro-tree" style="left: 60%; top: 38%;"></div>
+        <div class="retro-tree" style="left: 65%; top: 48%;"></div>
+        <div class="retro-tree" style="left: 62%; top: 58%;"></div>
+        <div class="retro-tree" style="left: 52%; top: 62%;"></div>
+        <div class="retro-tree" style="left: 45%; top: 65%;"></div>
+        <div class="retro-tree" style="left: 35%; top: 60%;"></div>
+        
+        <div class="retro-rock" style="left: 44%; top: 45%;"></div>
+        <div class="retro-rock" style="left: 56%; top: 48%;"></div>
+        <div class="retro-rock" style="left: 52%; top: 42%;"></div>
+        <div class="retro-rock" style="left: 39%; top: 55%;"></div>
+        <div class="retro-rock" style="left: 46%; top: 58%;"></div>
+        <div class="retro-rock" style="left: 60%; top: 52%;"></div>
+        <div class="retro-rock" style="left: 32%; top: 42%;"></div>
+        <div class="retro-rock" style="left: 68%; top: 45%;"></div>
+        
+        <div class="retro-crystal" style="left: 41%; top: 48%;"></div>
+        <div class="retro-crystal" style="left: 58%; top: 45%;"></div>
+        <div class="retro-crystal" style="left: 48%; top: 38%;"></div>
+        <div class="retro-crystal" style="left: 54%; top: 60%;"></div>
+        <div class="retro-crystal" style="left: 35%; top: 50%;"></div>
+        <div class="retro-crystal" style="left: 65%; top: 35%;"></div>
+        
+        <!-- Player Tokens -->
+        <div class="player-token" id="playerToken1" style="left:50%;top:50%; background: url('../assets/avatars/default.png') center/cover no-repeat; border-radius: 50%;">
+            <div class="token-name">Aldric</div>
+        </div>
+        <div class="player-token" id="playerToken2" style="left:46%;top:45%; background: url('../assets/avatars/1.png') center/cover no-repeat; border-radius: 50%;">
+            <div class="token-name">Zira</div>
+        </div>
+        <div class="player-token" id="playerToken3" style="left:54%;top:52%; background: url('../assets/avatars/7.png') center/cover no-repeat; border-radius: 50%;">
+            <div class="token-name">Gorrim</div>
+        </div>
+        <div class="player-token" id="playerToken4" style="left:51%;top:42%; background: url('../assets/avatars/4.png') center/cover no-repeat; border-radius: 50%;">
+            <div class="token-name">Misha228</div>
+        </div>
+    </div>
+</div>
+
+<!-- ══ TOP HUD (DM Controls) ══ -->
+<div class="hud-top dm-hud">
+    <div class="hud-top-frame"></div>
+    <div class="hud-top-content" style="gap: 30px; align-items: center;">
+        <div class="hud-campaign-name" style="line-height: 1.4;">
+            <div>⚔ Curse of Strahd</div>
+            <div style="font-size: 10px; color: #e74c3c; letter-spacing: 1px;">(DM Mode)</div>
+        </div>
+        <div class="hud-session" style="display: flex; flex-direction: column; align-items: center;">
+            <div style="margin-bottom: 4px;">Round <span id="roundNum">3</span></div>
+            <div style="display: flex; gap: 5px;">
+                <button class="dm-ctrl-btn" onclick="document.getElementById('roundNum').innerText=parseInt(document.getElementById('roundNum').innerText)-1">-</button>
+                <button class="dm-ctrl-btn" onclick="document.getElementById('roundNum').innerText=parseInt(document.getElementById('roundNum').innerText)+1">+</button>
+            </div>
+        </div>
+        <div class="hud-turn" style="display: flex; flex-direction: column; align-items: center; gap: 6px;">
+            <div class="turn-indicator" style="margin: 0; padding: 2px 12px; min-width: 120px;">
+                <span class="turn-text" id="currentTurnText">Turn: Aldric</span>
+            </div>
+            <button class="dm-ctrl-btn next-turn-btn" id="nextTurnBtn">Next Turn</button>
+        </div>
+    </div>
+</div>
+
+<!-- ══ LEFT: DM Tools / Roster ══ -->
+<div class="char-panel left-char-panel" id="dmPanel">
+    <div class="char-panel-frame"></div>
+    <div class="char-panel-content">
+        <div class="ingame-portrait" id="ingamePortraitLeft" style="background: url('../assets/avatars/4.png') center/cover no-repeat; border-radius: 8px;"></div>
+        <div class="char-panel-name">DM Dashboard</div>
+        
+        <div class="action-tabs dm-tabs" style="margin-bottom: 15px;">
+            <button class="at-btn active" id="tabRosterBtn">Roster</button>
+            <button class="at-btn" id="tabBestiaryBtn">Bestiary</button>
+        </div>
+
+        <!-- Roster Content -->
+        <div id="dmRoster">
+            <div class="resource-bar-section">
+                <div class="resource-label" style="display:flex; justify-content:space-between;">
+                    <span>Aldric</span> <span>AC 18</span>
+                </div>
+                <div class="resource-bar hp-bar" style="cursor: pointer;" title="Click to edit HP">
+                    <div class="resource-fill hp-fill" style="width:85%"></div>
+                    <span class="resource-text">85 / 100</span>
+                </div>
+            </div>
+            <div class="resource-bar-section">
+                <div class="resource-label" style="display:flex; justify-content:space-between;">
+                    <span>Zira</span> <span>AC 15</span>
+                </div>
+                <div class="resource-bar hp-bar" style="cursor: pointer;" title="Click to edit HP">
+                    <div class="resource-fill hp-fill" style="width:90%; background: linear-gradient(90deg, #bb4444, #dd5555);"></div>
+                    <span class="resource-text">54 / 60</span>
+                </div>
+            </div>
+            <div class="resource-bar-section">
+                <div class="resource-label" style="display:flex; justify-content:space-between;">
+                    <span>Gorrim</span> <span>AC 20</span>
+                </div>
+                <div class="resource-bar hp-bar" style="cursor: pointer;" title="Click to edit HP">
+                    <div class="resource-fill hp-fill" style="width:85%"></div>
+                    <span class="resource-text">120 / 140</span>
+                </div>
+            </div>
+            
+            <div class="gold-divider" style="margin: 15px 0;"></div>
+            
+            <div class="resource-label" style="color: #e74c3c; font-size: 11px;">Active Enemies</div>
+            <div class="resource-bar-section">
+                <div class="resource-label" style="display:flex; justify-content:space-between; font-size: 10px;">
+                    <span>Vampire Spawn A</span> <span>AC 15</span>
+                </div>
+                <div class="resource-bar" style="height: 12px; background: rgba(0,0,0,0.5); cursor: pointer; border: 1px solid rgba(231, 76, 60, 0.3);">
+                    <div class="resource-fill" style="width:100%; background: #e74c3c;"></div>
+                    <span class="resource-text" style="font-size: 9px; line-height: 12px; color: #fff;">82 / 82</span>
+                </div>
+            </div>
+            <div class="resource-bar-section">
+                <div class="resource-label" style="display:flex; justify-content:space-between; font-size: 10px;">
+                    <span>Vampire Spawn B</span> <span>AC 15</span>
+                </div>
+                <div class="resource-bar" style="height: 12px; background: rgba(0,0,0,0.5); cursor: pointer; border: 1px solid rgba(231, 76, 60, 0.3);">
+                    <div class="resource-fill" style="width:40%; background: #e74c3c;"></div>
+                    <span class="resource-text" style="font-size: 9px; line-height: 12px; color: #fff;">32 / 82</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bestiary Content -->
+        <div id="dmBestiary" style="display:none;">
+            <div class="quick-inventory" style="grid-template-columns: 1fr; gap: 10px;">
+                <button class="dm-action-btn"><span class="monster-cr">CR 1</span> Dire Wolf</button>
+                <button class="dm-action-btn"><span class="monster-cr">CR 1/4</span> Zombie</button>
+                <button class="dm-action-btn"><span class="monster-cr">CR 5</span> Vampire Spawn</button>
+                <button class="dm-action-btn"><span class="monster-cr">CR 1/4</span> Swarm of Bats</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ══ CHAT PANEL ══ -->
+<div class="game-chat-frame open" id="chatFrame">
+    <div class="chat-frame-bg"></div>
+    <div class="game-chat-content">
+        <div class="chat-header-strip">
+            <span>⚔ Campaign Chat (DM Mode)</span>
+            <div class="chat-tabs">
+                <button class="chat-tab active" data-chat="all">All</button>
+                <button class="chat-tab" data-chat="dm">Whispers</button>
+            </div>
+        </div>
+        <div class="game-chat-messages scrollable" id="chatMessages">
+            <div class="chat-msg system">🎲 Session 7 has begun!</div>
+            <div class="chat-msg dm"><span class="msg-author dm-author">You:</span> You enter the dark castle hall...</div>
+            <div class="chat-msg player"><span class="msg-author">Misha228:</span> I check for traps! [rolled 17]</div>
+            <div class="chat-msg player"><span class="msg-author">Gorrim:</span> Then I CHARGE!</div>
+        </div>
+        
+        <!-- Secret Roll Toggle -->
+        <div class="secret-roll-container">
+            <label class="switch">
+                <input type="checkbox" id="secretRollToggle">
+                <span class="slider round"></span>
+            </label>
+            <span class="secret-label">Secret Roll / Whisper</span>
+        </div>
+
+        <div class="chat-input-row">
+            <div class="chat-input-bg"></div>
+            <input type="text" class="game-chat-input" id="chatInput" placeholder="Type message or /roll...">
+            <button class="chat-send-btn-game" id="chatSendBtn">
+                <span>→</span>
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- ══ DICE PANEL: d6 3D ══ -->
+<div class="dice-panel" id="dicePanel" style="display:none;">
+    <div class="dice-panel-content">
+        <div class="dice-title">🎲 DM Roll</div>
+        <div class="dice3d-wrap" id="dice3dWrap" style="position: relative;">
+            <canvas id="diceCanvas" width="160" height="160"></canvas>
+            <div id="dice3dOverlayText" style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; pointer-events: none; font-family: var(--font-cinzel-deco); font-size: 42px; color: var(--color-gold); text-shadow: 0 0 15px rgba(212,175,55,0.8); z-index: 10;"></div>
+        </div>
+        <div class="dice-grid">
+            <button class="die-btn" data-sides="4">d4</button>
+            <button class="die-btn active-die" data-sides="6">d6</button>
+            <button class="die-btn" data-sides="8">d8</button>
+            <button class="die-btn" data-sides="10">d10</button>
+            <button class="die-btn" data-sides="12">d12</button>
+            <button class="die-btn" data-sides="20">d20</button>
+            <button class="die-btn" data-sides="100" id="d100Btn">d100</button>
+        </div>
+        <div class="dice-result" id="diceResult">
+            <span class="dice-result-text" id="diceResultText">Roll!</span>
+        </div>
+    </div>
+</div>
+
+<!-- ══ ACTION PANEL (DM Controls) ══ -->
+<div class="action-panel" id="actionPanel" style="display:none;">
+    <div class="action-panel-bg"></div>
+    <div class="action-panel-content">
+        <div class="action-title">DM Actions</div>
+        <div class="actions-list" style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+            <div class="action-item" onclick="alert('Global request roll')">
+                <div class="action-item-info">
+                    <div class="action-item-name">Request Roll</div>
+                    <div class="action-item-desc">Ask all players to roll</div>
+                </div>
+            </div>
+            <div class="action-item" onclick="alert('Give Loot Modal')">
+                <div class="action-item-info">
+                    <div class="action-item-name">Give Loot</div>
+                    <div class="action-item-desc">Distribute gold or items</div>
+                </div>
+            </div>
+            <div class="action-item" onclick="alert('Change Map')">
+                <div class="action-item-info">
+                    <div class="action-item-name">Change Map</div>
+                    <div class="action-item-desc">Switch active scene</div>
+                </div>
+            </div>
+            <div class="action-item" onclick="alert('Toggle Fog of War')">
+                <div class="action-item-info">
+                    <div class="action-item-name">Fog of War</div>
+                    <div class="action-item-desc">Reveal/hide areas</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ══ BOTTOM NAV BUTTONS ══ -->
+<nav class="game-nav" id="gameNav">
+    <div class="game-nav-bg"></div>
+    <div class="game-nav-buttons">
+        <button class="gnav-btn" id="chatToggle" title="Chat">
+            <div class="gnav-icon" style="font-size: 20px; border: none; display: flex; align-items: center; justify-content: center;">💬</div>
+            <span class="gnav-label">Chat</span>
+        </button>
+        <button class="gnav-btn" id="sheetToggle" title="DM Tools">
+            <div class="gnav-icon" style="font-size: 20px; border: none; display: flex; align-items: center; justify-content: center;">🛠️</div>
+            <span class="gnav-label">DM Tools</span>
+        </button>
+        <button class="gnav-btn" id="diceToggle" title="Dice">
+            <div class="gnav-icon" style="font-size: 20px; border: none; display: flex; align-items: center; justify-content: center;">🎲</div>
+            <span class="gnav-label">Dice</span>
+        </button>
+        <button class="gnav-btn" id="actionToggle" title="DM Actions">
+            <div class="gnav-icon" style="font-size: 20px; border: none; display: flex; align-items: center; justify-content: center;">⚔️</div>
+            <span class="gnav-label">Actions</span>
+        </button>
+        <button class="gnav-btn" id="menuToggle" title="Menu">
+            <div class="gnav-icon" style="font-size: 20px; border: none; display: flex; align-items: center; justify-content: center;">⚙️</div>
+            <span class="gnav-label">Menu</span>
+        </button>
+        <button class="gnav-btn danger" id="pauseGameBtn" title="Pause Game" style="border-color:rgba(212,55,55,0.4);color:#e74c3c;">
+            <div class="gnav-icon" style="font-size: 20px; border: none; display: flex; align-items: center; justify-content: center; color:#e74c3c;">⏸️</div>
+            <span class="gnav-label" style="color:#e74c3c;">Pause Game</span>
+        </button>
+    </div>
+</nav>
+
+<!-- ══ GAME MENU OVERLAY ══ -->
+<div class="game-menu-overlay" id="menuFrame" style="display:none;">
+    <div class="menu-frame-bg"></div>
+    <div class="game-menu-content panel">
+        <button class="menu-close-btn" id="menuCross">✕</button>
+        <div class="game-menu-title">⚙ Game Admin Menu</div>
+        <div class="gold-divider"></div>
+        <div class="game-menu-options">
+            <button class="game-menu-opt" id="playersBtn">
+                <span>👥 Manage Players</span>
+            </button>
+            <button class="game-menu-opt" id="saveGameBtn">
+                <span>💾 Save Game State</span>
+            </button>
+            <button class="game-menu-opt danger" id="exitGameBtn">
+                <span>🚪 Leave Game</span>
+            </button>
+            <button class="game-menu-opt danger" id="deleteGameBtn" style="border-color: #8B0000; color: #8B0000;">
+                <span>🗑 Delete Campaign</span>
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- ══ DICE ROLL NOTIFICATION ══ -->
+<div class="roll-notification" id="rollNotif" style="display:none;">
+    <div class="roll-notif-bg"></div>
+    <div class="roll-notif-content">
+        <div class="roll-die-icon">🎲</div>
+        <div class="roll-result-num" id="rollNumNotif">—</div>
+        <div class="roll-result-label" id="rollLabel">DM Secret Roll</div>
+    </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="../common.js"></script>
+<script src="../game/dice3d.js"></script>
+<script src="game_adm.js"></script>
+</body>
+</html>

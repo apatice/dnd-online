@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="D&D Online — играй в Dungeons & Dragons онлайн с друзьями">
+    <title>DnD Online</title>
+    <link rel="stylesheet" href="common.css">
+    <style>
+        body { margin: 0; background: var(--color-bg-dark); display: flex; align-items: center; justify-content: center; min-height: 100vh; flex-direction: column; }
+        .splash { text-align: center; animation: fadeIn 1s ease; }
+        .splash-title { font-family: var(--font-cinzel-deco); font-size: 72px; color: var(--color-gold); text-shadow: var(--shadow-text); letter-spacing: 12px; margin-bottom: 16px; }
+        .splash-sub { font-family: var(--font-crimson); font-size: 22px; color: rgba(212,175,55,0.5); font-style: italic; letter-spacing: 6px; margin-bottom: 48px; }
+        .enter-btn { padding: 18px 60px; font-size: 16px; letter-spacing: 6px; }
+        .bar-wrap { width: 300px; height: 2px; background: rgba(212,175,55,0.1); margin: 40px auto 0; border-radius: 1px; overflow: hidden; }
+        .bar { height: 100%; background: linear-gradient(90deg, var(--color-gold-dark), var(--color-gold)); animation: loadingFill 2s ease-out forwards; }
+    </style>
+</head>
+<body>
+<div id="particles" class="particle-bg"></div>
+<div id="runes" class="rune-bg"></div>
+
+<div class="splash">
+    <div class="splash-title">D&D</div>
+    <div class="splash-sub">Dungeons & Dragons Online</div>
+    <a href="authorization/authorization.html" class="btn-gold enter-btn">⚔ Enter the Realm</a>
+    <div class="bar-wrap"><div class="bar"></div></div>
+</div>
+
+<script src="common.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        initParticles('particles');
+        initRunes('runes');
+    });
+</script>
+</body>
+</html>

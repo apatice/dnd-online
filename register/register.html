@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Регистрация в D&D Online — создайте аккаунт и начните приключение">
+    <title>DnD Online — Регистрация</title>
+    <link rel="stylesheet" href="../common.css">
+    <link rel="stylesheet" href="register.css">
+</head>
+<body>
+
+<!-- Loading Screen -->
+<div id="loadingScreen" class="loading-screen">
+    <div class="loading-logo">D&D</div>
+    <div class="loading-bar-wrap"><div class="loading-bar-fill"></div></div>
+    <div style="font-family:var(--font-cinzel);font-size:13px;color:rgba(212,175,55,0.5);letter-spacing:4px;">LOADING...</div>
+</div>
+
+<!-- 🖼 PLACEHOLDER: reg-bg → assets/register/bg.jpg — Тёмный фоновый рисунок (подземелье/замок) -->
+<div class="reg-bg img-placeholder" data-label="bg.jpg"></div>
+
+<div id="particles" class="particle-bg"></div>
+<div id="runes" class="rune-bg"></div>
+
+<!-- Decorative shield -->
+<div class="reg-shield" aria-hidden="true">
+    <!-- 🖼 PLACEHOLDER: shield → assets/register/shield.png — Щит декоративный -->
+    <div class="img-placeholder shield-img" data-label="shield.png"></div>
+</div>
+
+<main class="reg-main">
+    <header class="reg-header">
+        <!-- 🖼 PLACEHOLDER: reg-logo → assets/register/logo.png — Логотип на странице регистрации -->
+        <div class="reg-logo img-placeholder" data-label="logo.png"></div>
+        <h1 class="reg-title">Begin Your Legend</h1>
+        <p class="reg-subtitle">Create your adventurer's account</p>
+    </header>
+
+    <div class="reg-panel panel corner-border">
+        <div class="reg-steps">
+            <div class="step active" data-step="1">
+                <div class="step-num">1</div>
+                <div class="step-label">Account</div>
+            </div>
+            <div class="step-line"></div>
+            <div class="step" data-step="2">
+                <div class="step-num">2</div>
+                <div class="step-label">Profile</div>
+            </div>
+            <div class="step-line"></div>
+            <div class="step" data-step="3">
+                <div class="step-num">3</div>
+                <div class="step-label">Confirm</div>
+            </div>
+        </div>
+
+        <div class="gold-divider"></div>
+
+        <!-- Step 1: Account -->
+        <div class="step-content active" id="step1">
+            <h2 class="step-title">Account Details</h2>
+            <div class="auth-form">
+                <div class="field-group">
+                    <label class="field-label" for="regEmail">✉ Email Address</label>
+                    <div class="field-wrap">
+                        <!-- 🖼 PLACEHOLDER: reg-icon-email → assets/register/icon_email.png — Иконка поля email -->
+                        <div class="field-icon-img img-placeholder" data-label="icon_email.png"></div>
+                        <input type="email" id="regEmail" class="input-base field-input" placeholder="your@email.com" required>
+                    </div>
+                </div>
+                <div class="field-group">
+                    <label class="field-label" for="regPass">🔒 Password</label>
+                    <div class="field-wrap">
+                        <!-- 🖼 PLACEHOLDER: reg-icon-pass → assets/register/icon_pass.png — Иконка поля пароля -->
+                        <div class="field-icon-img img-placeholder" data-label="icon_pass.png"></div>
+                        <input type="password" id="regPass" class="input-base field-input" placeholder="Min. 8 characters" required>
+                        <button type="button" class="pass-toggle" onclick="togglePass('regPass', this)">👁</button>
+                    </div>
+                    <div class="pass-strength" id="passStrength">
+                        <div class="strength-bar"><div class="strength-fill" id="strengthFill"></div></div>
+                        <span class="strength-label" id="strengthLabel">Strength</span>
+                    </div>
+                </div>
+                <div class="field-group">
+                    <label class="field-label" for="regPassConfirm">🔐 Confirm Password</label>
+                    <div class="field-wrap">
+                        <!-- 🖼 PLACEHOLDER: reg-icon-pass2 → assets/register/icon_pass.png — Иконка подтверждения пароля -->
+                        <div class="field-icon-img img-placeholder" data-label="icon_pass.png"></div>
+                        <input type="password" id="regPassConfirm" class="input-base field-input" placeholder="Repeat password" required>
+                    </div>
+                </div>
+                <button class="btn-gold auth-submit" onclick="nextStep(2)">
+                    <span class="btn-text">Continue →</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Step 2: Profile -->
+        <div class="step-content" id="step2">
+            <h2 class="step-title">Your Identity</h2>
+            <div class="auth-form">
+                <div class="field-group">
+                    <label class="field-label" for="regNick">⚔ Username / Nickname</label>
+                    <div class="field-wrap">
+                        <!-- 🖼 PLACEHOLDER: reg-icon-nick → assets/register/icon_user.png — Иконка поля никнейма -->
+                        <div class="field-icon-img img-placeholder" data-label="icon_user.png"></div>
+                        <input type="text" id="regNick" class="input-base field-input" placeholder="Your hero name" maxlength="20" required>
+                    </div>
+                </div>
+                <div class="avatar-pick-section">
+                    <div class="field-label" style="margin-bottom:12px;">🛡 Choose Starting Avatar</div>
+                    <div class="avatar-pick-grid">
+                        <!-- 🖼 PLACEHOLDER: avatar-1 → assets/avatars/default_1.jpg — Аватар выбора 1 -->
+                        <div class="avatar-pick img-placeholder" data-label="ava_1.jpg" data-selected="false" onclick="selectAvatar(this, 1)"></div>
+                        <!-- 🖼 PLACEHOLDER: avatar-2 → assets/avatars/default_2.jpg — Аватар выбора 2 -->
+                        <div class="avatar-pick img-placeholder" data-label="ava_2.jpg" data-selected="false" onclick="selectAvatar(this, 2)"></div>
+                        <!-- 🖼 PLACEHOLDER: avatar-3 → assets/avatars/default_3.jpg — Аватар выбора 3 -->
+                        <div class="avatar-pick img-placeholder" data-label="ava_3.jpg" data-selected="false" onclick="selectAvatar(this, 3)"></div>
+                        <!-- 🖼 PLACEHOLDER: avatar-4 → assets/avatars/default_4.jpg — Аватар выбора 4 -->
+                        <div class="avatar-pick img-placeholder" data-label="ava_4.jpg" data-selected="false" onclick="selectAvatar(this, 4)"></div>
+                        <!-- 🖼 PLACEHOLDER: avatar-5 → assets/avatars/default_5.jpg — Аватар выбора 5 -->
+                        <div class="avatar-pick img-placeholder" data-label="ava_5.jpg" data-selected="false" onclick="selectAvatar(this, 5)"></div>
+                        <!-- 🖼 PLACEHOLDER: avatar-6 → assets/avatars/default_6.jpg — Аватар выбора 6 -->
+                        <div class="avatar-pick img-placeholder" data-label="ava_6.jpg" data-selected="false" onclick="selectAvatar(this, 6)"></div>
+                    </div>
+                </div>
+                <div class="field-group">
+                    <label class="field-label" for="regGender">⚥ Gender</label>
+                    <select id="regGender" class="input-base">
+                        <option value="">Select...</option>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                        <option value="secret">Secret</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                <div class="nav-buttons">
+                    <button class="btn-gold" style="flex:1;padding:14px;" onclick="nextStep(1)">← Back</button>
+                    <button class="btn-gold auth-submit" style="flex:2;" onclick="nextStep(3)">
+                        <span class="btn-text">Continue →</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 3: Confirm -->
+        <div class="step-content" id="step3">
+            <h2 class="step-title">Ready to Begin?</h2>
+            <div class="confirm-summary" id="confirmSummary">
+                <div class="summary-avatar img-placeholder" id="summaryAvatar" data-label="selected_ava.jpg"></div>
+                <div class="summary-info">
+                    <div class="summary-name" id="summaryName">Hero</div>
+                    <div class="summary-email" id="summaryEmail">email@domain.com</div>
+                </div>
+            </div>
+            <div class="auth-form">
+                <label class="tos-wrap">
+                    <input type="checkbox" id="tosCheck">
+                    <span class="checkmark"></span>
+                    <span class="tos-text">I agree to the <a href="#" class="auth-link">Terms of Service</a> and <a href="#" class="auth-link">Privacy Policy</a></span>
+                </label>
+                <label class="tos-wrap">
+                    <input type="checkbox" id="newsCheck">
+                    <span class="checkmark"></span>
+                    <span class="tos-text">Subscribe to news & updates</span>
+                </label>
+                <button class="btn-gold auth-submit" id="finalRegBtn" onclick="handleRegister()">
+                    <!-- 🖼 PLACEHOLDER: btn-register → assets/register/btn_register.png — Кнопка завершения регистрации -->
+                    <div class="btn-img img-placeholder" data-label="btn_register.png"></div>
+                    <span class="btn-text">⚔ Create Account</span>
+                </button>
+                <div class="nav-buttons">
+                    <button class="btn-gold" style="width:100%;padding:12px;font-size:12px;" onclick="nextStep(2)">← Back</button>
+                </div>
+            </div>
+        </div>
+
+        <p class="auth-footer-text" style="margin-top:20px;">
+            Already a member? <a href="../authorization/authorization.html" class="auth-link">Sign in →</a>
+        </p>
+    </div>
+</main>
+
+<div class="toast" id="regToast"></div>
+
+<script src="../common.js"></script>
+<script src="register.js"></script>
+</body>
+</html>
